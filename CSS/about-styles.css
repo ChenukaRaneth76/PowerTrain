@@ -596,11 +596,11 @@ body {
     height: 250px;
     margin: 0 auto 1rem;
     border-radius: 10px;
-    background: #f5f5f5;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     transition: transform 0.3s ease;
+    will-change: transform;
 }
 
 .crew-image.hasitha {

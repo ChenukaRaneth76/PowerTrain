@@ -7,6 +7,33 @@
     'use strict';
 
     // ============================
+    // THROTTLE UTILITY FOR PERFORMANCE
+    // ============================
+    function throttle(func, wait) {
+        let timeout = null;
+        let previous = 0;
+        return function(...args) {
+            const now = Date.now();
+            const remaining = wait - (now - previous);
+            
+            if (remaining <= 0 || remaining > wait) {
+                if (timeout) {
+                    clearTimeout(timeout);
+                    timeout = null;
+                }
+                previous = now;
+                func.apply(this, args);
+            } else if (!timeout) {
+                timeout = setTimeout(() => {
+                    previous = Date.now();
+                    timeout = null;
+                    func.apply(this, args);
+                }, remaining);
+            }
+        };
+    }
+
+    // ============================
     // 1. PRODUCT TABS FUNCTIONALITY
     // ============================
     function initProductTabs() {
@@ -105,13 +132,13 @@
             });
         });
 
-        // Update underline position on window resize
-        window.addEventListener('resize', () => {
+        // Update underline position on window resize (throttled)
+        window.addEventListener('resize', throttle(() => {
             const activeBtn = document.querySelector('.tab-btn.active');
             if (activeBtn) {
                 updateUnderline(activeBtn);
             }
-        });
+        }, 150));
         
         // Initialize products display - show only equipment by default
         const defaultCategory = 'equipment';
@@ -318,51 +345,57 @@
     }
 
     // ============================
-    // 7. HERO PARALLAX EFFECT
+    // 7. HERO PARALLAX EFFECT (OPTIMIZED)
     // ============================
     function initHeroParallax() {
-        window.addEventListener('scroll', () => {
+        const heroCircle = document.querySelector('.hero-circle');
+        const heroPhoto = document.querySelector('.hero-photo');
+        
+        if (!heroCircle && !heroPhoto) return;
+        
+        const handleScroll = throttle(() => {
             const scrolled = window.pageYOffset;
-            const heroCircle = document.querySelector('.hero-circle');
-            const heroPhoto = document.querySelector('.hero-photo');
             
-            if (heroCircle && heroPhoto && scrolled < window.innerHeight) {
-                heroCircle.style.transform = `scale(${1 + scrolled * 0.0005})`;
-                heroPhoto.style.transform = `translate(-50%, -50%) translateY(${scrolled * 0.3}px)`;
+            if (scrolled < window.innerHeight) {
+                requestAnimationFrame(() => {
+                    if (heroCircle) heroCircle.style.transform = `scale(${1 + scrolled * 0.0005})`;
+                    if (heroPhoto) heroPhoto.style.transform = `translate(-50%, -50%) translateY(${scrolled * 0.3}px)`;
+                });
             }
-        });
+        }, 16); // ~60fps
+        
+        window.addEventListener('scroll', handleScroll, { passive: true });
     }
 
     // ============================
-    // 8. SCROLL PROGRESS INDICATOR
+    // 8. SCROLL PROGRESS INDICATOR (OPTIMIZED)
     // ============================
     function initScrollProgress() {
-        function updateScrollProgress() {
+        let progressBar = document.createElement('div');
+        progressBar.className = 'scroll-progress';
+        progressBar.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: #dc2626;
+            z-index: 1001;
+            will-change: width;
+        `;
+        document.body.appendChild(progressBar);
+
+        const updateScrollProgress = throttle(() => {
             const scrollTop = window.pageYOffset;
             const docHeight = document.body.scrollHeight - window.innerHeight;
             const scrollPercent = (scrollTop / docHeight) * 100;
             
-            let progressBar = document.querySelector('.scroll-progress');
-            if (!progressBar) {
-                progressBar = document.createElement('div');
-                progressBar.className = 'scroll-progress';
-                progressBar.style.cssText = `
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 0%;
-                    height: 3px;
-                    background: #dc2626;
-                    z-index: 1001;
-                    transition: width 0.1s ease;
-                `;
-                document.body.appendChild(progressBar);
-            }
-            
-            progressBar.style.width = scrollPercent + '%';
-        }
+            requestAnimationFrame(() => {
+                progressBar.style.width = scrollPercent + '%';
+            });
+        }, 100);
 
-        window.addEventListener('scroll', updateScrollProgress);
+        window.addEventListener('scroll', updateScrollProgress, { passive: true });
     }
 
     // ============================
@@ -398,15 +431,14 @@
             });
         });
 
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollToTopBtn.style.opacity = '1';
-                scrollToTopBtn.style.transform = 'scale(1)';
-            } else {
-                scrollToTopBtn.style.opacity = '0';
-                scrollToTopBtn.style.transform = 'scale(0.8)';
-            }
-        });
+        const handleScrollVisibility = throttle(() => {
+            const shouldShow = window.pageYOffset > 300;
+            requestAnimationFrame(() => {
+                scrollToTopBtn.style.opacity = shouldShow ? '1' : '0';
+                scrollToTopBtn.style.transform = shouldShow ? 'scale(1)' : 'scale(0.8)';
+            });
+        }, 100);
+        window.addEventListener('scroll', handleScrollVisibility, { passive: true });
     }
 
     // ============================
@@ -455,16 +487,15 @@
             whatsappBtn.style.boxShadow = '0 5px 15px rgba(37, 211, 102, 0.3)';
         });
 
-        // Show/hide on scroll
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                whatsappBtn.style.opacity = '1';
-                whatsappBtn.style.transform = 'scale(1)';
-            } else {
-                whatsappBtn.style.opacity = '0';
-                whatsappBtn.style.transform = 'scale(0.8)';
-            }
-        });
+        // Show/hide on scroll (throttled)
+        const handleWhatsAppVisibility = throttle(() => {
+            const shouldShow = window.pageYOffset > 300;
+            requestAnimationFrame(() => {
+                whatsappBtn.style.opacity = shouldShow ? '1' : '0';
+                whatsappBtn.style.transform = shouldShow ? 'scale(1)' : 'scale(0.8)';
+            });
+        }, 100);
+        window.addEventListener('scroll', handleWhatsAppVisibility, { passive: true });
     }
 
     // ============================

@@ -423,15 +423,15 @@ body {
 }
 
 .vision-image.clothing {
-    background-image: url('../IMG/vision-cl.JPG');
+    background-image: url('../IMG/vision-cl.webp');
 }
 
 .vision-image.equipment {
-    background-image: url('../IMG/vision-eqp.JPG');
+    background-image: url('../IMG/vision-eqp.webp');
 }
 
 .vision-image.training {
-    background-image: url('../IMG/vision-tr.JPG');
+    background-image: url('../IMG/vision-tr.webp');
 }
 
 .vision-item h4 {

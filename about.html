@@ -4,17 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Powertain.Fitness</title>
+    
+    <!-- Preconnect for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Critical CSS -->
     <link rel="stylesheet" href="CSS/about-styles.css">
     <link rel="stylesheet" href="CSS/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Deferred fonts and icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="IMG/logo1.png" alt="Powertain.Fitness" class="nav-logo-img" style="height: 40px;">
+                <img src="IMG/logo1.png" alt="Powertain.Fitness" class="nav-logo-img" style="height: 40px;" width="120" height="120">
                 <h2>Powertain.Fitness</h2>
             </div>
             <ul class="nav-menu">
@@ -71,7 +80,7 @@
                 </div>
             </div>
             <div class="hero-image-container">
-                <img src="IMG/about.png" alt="Our Team" class="hero-team-image">
+                <img src="IMG/about.png" alt="Our Team" class="hero-team-image" loading="eager" width="1200" height="400">
             </div>
         </div>
     </section>
@@ -83,7 +92,7 @@
                 <div class="story-left">
                     <h2 class="story-heading">ABOUT US</h2>
                     <div class="story-image-wrapper">
-                        <img src="IMG/clothing.png" alt="Athlete" class="story-athlete-img">
+                        <img src="IMG/clothing.png" alt="Athlete" class="story-athlete-img" loading="lazy" width="400" height="auto">
                     </div>
                 </div>
                 <div class="story-right">
@@ -140,7 +149,7 @@
                         <h1>FUTURE</h1>
                     </div>
                     <div class="products-image-wrapper">
-                        <img src="IMG/create.png" alt="Craftsman" class="products-craftsman-img">
+                        <img src="IMG/create.png" alt="Craftsman" class="products-craftsman-img" loading="lazy" width="400" height="auto">
                     </div>
                 </div>
                 <div class="products-right">
@@ -246,7 +255,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <div class="footer-logo">
-                        <img src="IMG/logo1.png" alt="Powertain.Fitness" style="height: 30px;">
+                        <img src="IMG/logo1.png" alt="Powertain.Fitness" style="height: 30px;" width="120" height="120" loading="lazy">
                         <h3>Powertain.Fitness</h3>
                     </div>
                     <p>We're a community built on strength, movement, and discipline. From handcrafted equipment to performance apparel, everything we create is made to help you train harder, move smarter, and push beyond your limits.</p>
@@ -289,6 +298,6 @@
             </div>
         </div>
     </footer>
-     <script src="JS/AboutUs.js"></script>
+     <script src="JS/AboutUs.js" defer></script>
 </body>
 </html>

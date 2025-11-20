@@ -4,16 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Powertain.Fitness - Train Hard. Move Free.</title>
+    
+    <!-- Preconnect to external resources for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Critical CSS loaded immediately -->
     <link rel="stylesheet" href="CSS/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Non-critical resources deferred -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    </noscript>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="IMG/logo1.png" alt="Calisthenics.Co" class="nav-logo-img">
+                <img src="IMG/logo1.png" alt="Calisthenics.Co" class="nav-logo-img" width="120" height="120">
                 <h2>Powertain.Fitness</h2>
             </div>
             <ul class="nav-menu">
@@ -134,32 +147,32 @@
 
                  <!-- Equipment Products (Hidden by default) -->
                 <div class="product-card" data-category="equipment" style="display: none;">
-                    <div class="product-image" style="background-image: url('IMG/iteam1.jpg')"></div>
+                    <div class="product-image" style="background-image: url('IMG/iteam1.jpg')" loading="lazy"></div>
                     <h4>Classic pull-up Bar</h4>
                     <p>RS.15900.00</p>
                 </div>
                 <div class="product-card" data-category="equipment" style="display: none;">
-                    <div class="product-image" style="background-image: url('IMG/iteam1.jpg')"></div>
+                    <div class="product-image" style="background-image: url('IMG/iteam1.jpg')" loading="lazy"></div>
                     <h4>Resistance Bands</h4>
                     <p>RS.1200.00</p>
                 </div>
                 <div class="product-card" data-category="equipment" style="display: none;">
-                    <div class="product-image" style="background-image: url('IMG/iteam2.jpg')"></div>
+                    <div class="product-image" style="background-image: url('IMG/iteam2.jpg')" loading="lazy"></div>
                     <h4>Gymnastic Rings</h4>
                     <p>RS.2800.00</p>
                 </div>
                 <div class="product-card" data-category="equipment" style="display: none;">
-                    <div class="product-image" style="background-image: url('IMG/iteam3.jpg')"></div>
+                    <div class="product-image" style="background-image: url('IMG/iteam3.jpg')" loading="lazy"></div>
                     <h4>Premium High Parallettes</h4>
                     <p>RS.19900.00</p>
                 </div>
                 <div class="product-card" data-category="equipment" style="display: none;">
-                    <div class="product-image" style="background-image: url('IMG/iteam4.jpg')"></div>
+                    <div class="product-image" style="background-image: url('IMG/iteam4.jpg')" loading="lazy"></div>
                     <h4>Mini Parallettes</h4>
                     <p>RS.5900.00</p>
                 </div>
                 <div class="product-card" data-category="equipment" style="display: none;">
-                    <div class="product-image" style="background-image: url('IMG/iteam5.jpg')"></div>
+                    <div class="product-image" style="background-image: url('IMG/iteam5.jpg')" loading="lazy"></div>
                     <h4>Weight Vest</h4>
                     <p>RS.5500.00</p>
                 </div>
@@ -402,7 +415,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                         <div class="nav-logo">
-                        <img src="IMG/logo1.png" alt="Calisthenics.Co" class="nav-logo-img">
+                        <img src="IMG/logo1.png" alt="Calisthenics.Co" class="nav-logo-img" width="120" height="120" loading="lazy">
                         <h3>Powertain.Fitness</h3>
                     </div>
                     <p>We're a community built on strength, movement, and discipline. Our handcrafted equipment and performance apparel are designed to help you achieve your calisthenics goals.</p>
@@ -441,6 +454,6 @@
         </div>
     </footer>
 
-    <script src="JS/Home.js"></script>
+    <script src="JS/Home.js" defer></script>
 </body>
 </html>

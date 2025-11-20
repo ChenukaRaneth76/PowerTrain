@@ -1,4 +1,31 @@
-  // Mobile menu toggle
+// ============================
+// THROTTLE UTILITY FOR PERFORMANCE
+// ============================
+function throttle(func, wait) {
+    let timeout = null;
+    let previous = 0;
+    return function(...args) {
+        const now = Date.now();
+        const remaining = wait - (now - previous);
+        
+        if (remaining <= 0 || remaining > wait) {
+            if (timeout) {
+                clearTimeout(timeout);
+                timeout = null;
+            }
+            previous = now;
+            func.apply(this, args);
+        } else if (!timeout) {
+            timeout = setTimeout(() => {
+                previous = Date.now();
+                timeout = null;
+                func.apply(this, args);
+            }, remaining);
+        }
+    };
+}
+
+// Mobile menu toggle
         const navToggle = document.querySelector('.nav-toggle');
         const navMenu = document.querySelector('.nav-menu');
 
