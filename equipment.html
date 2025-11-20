@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment - Powertain.Fitness</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+     <link rel="stylesheet" href="CSS/equipment.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="IMG/logo1.png" alt="Powertain.Fitness" class="nav-logo-img">
+                <h2>Powertain.Fitness</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html">ABOUT US</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+                <li><a href="clothing.html">CLOTHING</a></li>
+                <li><a href="equipment.html" class="active">EQUIPMENT</a></li>
+            </ul>
+            <div class="nav-icons">
+                <i class="fas fa-user" id="openAuth"></i>
+                <a href="cart.html" class="cart-icon-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" style="display: none;">0</span>
+                </a>
+            </div>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="auth-modal-overlay">
+        <div class="auth-box">
+            <button class="auth-close">&times;</button>
+            <div class="auth-tabs">
+                <button id="loginTab" class="tab active">Login</button>
+                <button id="signupTab" class="tab">Signup</button>
+            </div>
+            <form id="loginForm" class="auth-form active">
+                <h3>Welcome Back</h3>
+                <input type="email" id="loginEmail" name="email" placeholder="Email" required>
+                <input type="password" id="loginPassword" name="password" placeholder="Password" required>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <p id="loginMsg"></p>
+            </form>
+            <form id="signupForm" class="auth-form">
+                <h3>Create Account</h3>
+                <input type="text" id="signupUsername" name="username" placeholder="Username" required>
+                <input type="email" id="signupEmail" name="email" placeholder="Email" required>
+                <input type="password" id="signupPassword" name="password" placeholder="Password" required>
+                <input type="password" id="signupConfirm" placeholder="Confirm Password" required>
+                <button type="submit" class="btn btn-primary">Signup</button>
+                <p id="signupMsg"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="equipment-hero">
+        <div class="hero-content-equipment">
+            <h1>EQUIPMENT</h1>
+            <p>Professional Gear for Serious Athletes</p>
+        </div>
+    </section>
+
+    <!-- Shop Container -->
+    <div class="shop-container">
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+            <div class="filter-group">
+                <label>Category</label>
+                <select id="categoryFilter">
+                    <option value="all">All Categories</option>
+                    <option value="weights">Weights</option>
+                    <option value="resistance">Resistance Bands</option>
+                    <option value="mat">Exercise Mats</option>
+                    <option value="gym equipments">Gym Equipments</option>
+                    <option value="Parallettes">Parallettes</option>
+                    <option value="pull-up bar">Pull-Up Bars</option>
+                    <option value="dip-bars">Dip-Bars</option>
+                    <option value="dip belt">Dip Belt</option>
+                    <option value="protective gear">Protective Gear</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Price Range</label>
+                <select id="priceFilter">
+                    <option value="all">All Prices</option>
+                    <option value="low">Under RS.2000</option>
+                    <option value="mid">RS.2000 - RS.4000</option>
+                    <option value="high">Above RS.4000</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Material</label>
+                <select id="materialFilter">
+                    <option value="all">All Materials</option>
+                    <option value="steel">Steel</option>
+                    <option value="wood">Wood</option>
+                    <option value="rubber">Rubber</option>
+                </select>
+            </div>
+            <div class="filter-tags">
+                <div class="filter-tag active" data-filter="all">All</div>
+                <div class="filter-tag" data-filter="new">New</div>
+                <div class="filter-tag" data-filter="sale">Sale</div>
+            </div>
+        </div>
+
+        <!-- Results Header -->
+        <div class="results-header">
+            <div class="results-count">Showing <span id="productCount">12</span> products</div>
+            <div class="sort-dropdown">
+                <select id="sortBy">
+                    <option value="featured">Featured</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="newest">Newest First</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid-shop" id="productsGrid">
+            <!-- Loading spinner -->
+            <div id="loadingProducts" class="loading-products">
+                <div class="spinner"></div>
+                <p>Loading equipment...</p>
+            </div>
+            
+            <!-- Products will be loaded dynamically -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-dumbbell"></i>
+                        <h3>Powertain.Fitness</h3>
+                    </div>
+                    <p>Transform your body and mind with us.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>USEFUL LINKS</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="equipment.html">Equipment</a></li>
+                        <li><a href="clothing.html">Clothing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>CONTACT US</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>Powertain@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>077123123456</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>413/A Harwela Sr. Lanka</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Powertain.Fitness All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="JS/cart.js"></script>
+    <script src="JS/Home.js"></script>
+    <script src="JS/equipment.js"></script>
+</body>
+</html>

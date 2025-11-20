@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Product - Powertain.Fitness</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* ================================
+   PRODUCT PAGE — PREMIUM VERSION
+   Fully responsive · Clean styling
+   Layout unchanged
+================================ */
+
+/* Page */
+.product-page {
+    padding-top: 80px;
+    background: #f5f6f8;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Loading & Not Found */
+.loading-container,
+.not-found-container {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #e1e1e1;
+    border-top: 4px solid #000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Container */
+.product-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Layout */
+.product-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+/* ============================
+   IMAGE SECTION (Left Side)
+============================= */
+
+.product-images {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Thumbnails – Smaller & Fully Visible */
+.thumbnail-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.thumbnail {
+    width: 65px;          
+    height: 65px;         
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.25s ease;
+    background: #f1f1f1;
+    padding: 6px;         
+    object-fit: contain;  
+    object-position: center;
+}
+
+.thumbnail:hover,
+.thumbnail.active {
+    border-color: #000;
+    transform: scale(1.04);
+}
+
+/* Main image container – Reduced height FIX */
+.main-image-container {
+    flex: 1;
+    width: 100%;
+    max-height: 480px;
+    background: #f3f4f6;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main Image – Fully visible without distortion */
+.main-image {
+    width: 100%;
+    height: auto;
+    max-height: 480px;
+    object-fit: contain;
+    object-position: center;
+    background: #f3f4f6;
+}
+
+/* Product Types */
+.main-image.equipment,
+.main-image.clothing {
+    object-fit: contain;
+    padding: 25px;
+}
+
+/* ============================
+   PRODUCT INFO (Right Side)
+============================= */
+
+.product-info {
+    padding-left: 1rem;
+}
+
+.product-title {
+    font-size: 2.3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+    color: #111;
+}
+
+/* Rating */
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.stars {
+    color: #fbbf24;
+    font-size: 1.2rem;
+}
+
+.rating-text {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Pricing */
+.price-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.current-price {
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: #000;
+}
+
+.original-price {
+    font-size: 1.3rem;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.discount {
+    background: #dc2626;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Colors */
+.color-section {
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    font-size: 1rem;
+    color: #111;
+}
+
+.color-options {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.color-option {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.color-option.active {
+    border-color: #000;
+}
+
+/* Sizes */
+.size-section {
+    margin-bottom: 2rem;
+}
+
+.size-guide {
+    color: #666;
+    text-decoration: underline;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+.size-options {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.size-option {
+    padding: 12px 20px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    min-width: 50px;
+    text-align: center;
+    border-radius: 6px;
+}
+
+.size-option:hover,
+.size-option.active {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+}
+
+/* Out of Stock */
+.size-option.out-of-stock {
+    background: #f3f4f6;
+    color: #9ca3af;
+    border-color: #e5e7eb;
+    cursor: not-allowed;
+    position: relative;
+}
+
+.size-option.out-of-stock::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #9ca3af;
+    transform: translateY(-50%);
+}
+
+/* Stock Indicators */
+.low-stock {
+    color: #f59e0b;
+    font-weight: bold;
+}
+
+.stock-status-display {
+    margin-top: 0.5rem;
+}
+
+.stock-indicator {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.stock-in { background: rgba(16,185,129,0.1); color: #10b981; }
+.stock-out { background: rgba(239,68,68,0.1); color: #ef4444; }
+.stock-low { background: rgba(245,158,11,0.1); color: #f59e0b; }
+
+/* Add to Cart */
+.add-to-cart-section {
+    margin-bottom: 3rem;
+}
+
+.add-to-cart-btn {
+    width: 100%;
+    background: #000;
+    color: white;
+    border: none;
+    padding: 16px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+    background: #333;
+}
+
+/* Accordion Sections */
+.product-details-sections {
+    border-top: 1px solid #eee;
+    padding-top: 2rem;
+}
+
+.detail-section {
+    border-bottom: 1px solid #eee;
+    padding: 1.5rem 0;
+}
+
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+.detail-content {
+    margin-top: 1rem;
+    color: #555;
+    line-height: 1.65;
+}
+
+/* Hero Banner */
+.hero-banner {
+    background: linear-gradient(135deg, #ff6b6b, #feca57);
+    color: white;
+    text-align: center;
+    padding: 4rem 2rem;
+    margin: 4rem 0;
+    border-radius: 12px;
+}
+
+.hero-text {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Related Products */
+.related-products {
+    margin-top: 4rem;
+}
+
+.section-heading {
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+.product-card {
+    text-align: center;
+    cursor: pointer;
+}
+
+.product-card img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.product-name {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+}
+
+.product-price {
+    font-weight: 700;
+    color: #000;
+}
+
+/* ============================
+   RESPONSIVE DESIGN
+============================= */
+
+@media (max-width: 1024px) {
+    .product-layout {
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .main-image-container,
+    .main-image {
+        max-height: 420px;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .product-images {
+        flex-direction: column-reverse;
+    }
+
+    .thumbnail-column {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+    }
+
+    .product-info {
+        padding-left: 0;
+    }
+
+    .main-image-container,
+    .main-image {
+        max-height: 360px;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .product-title {
+        font-size: 1.8rem;
+    }
+
+    .current-price {
+        font-size: 1.6rem;
+    }
+
+    .add-to-cart-btn {
+        padding: 15px;
+    }
+
+    .main-image-container,
+    .main-image {
+        max-height: 300px;
+    }
+
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="IMG/logo1.png" alt="Powertain.Fitness" class="nav-logo-img">
+                <h2>Powertain.Fitness</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html">ABOUT US</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+                <li><a href="clothing.html">CLOTHING</a></li>
+                <li><a href="equipment.html">EQUIPMENT</a></li>
+            </ul>
+            <div class="nav-icons">
+                <i class="fas fa-user" id="openAuth"></i>
+                <a href="cart.html" class="cart-icon-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" style="display: none;">0</span>
+                </a>
+            </div>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="auth-modal-overlay">
+        <div class="auth-box">
+            <button class="auth-close">&times;</button>
+            <div class="auth-tabs">
+                <button id="loginTab" class="tab active">Login</button>
+                <button id="signupTab" class="tab">Signup</button>
+            </div>
+            <form id="loginForm" class="auth-form active">
+                <h3>Welcome Back</h3>
+                <input type="email" id="loginEmail" name="email" placeholder="Email" required>
+                <input type="password" id="loginPassword" name="password" placeholder="Password" required>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <p id="loginMsg"></p>
+            </form>
+            <form id="signupForm" class="auth-form">
+                <h3>Create Account</h3>
+                <input type="text" id="signupUsername" name="username" placeholder="Username" required>
+                <input type="email" id="signupEmail" name="email" placeholder="Email" required>
+                <input type="password" id="signupPassword" name="password" placeholder="Password" required>
+                <input type="password" id="signupConfirm" placeholder="Confirm Password" required>
+                <button type="submit" class="btn btn-primary">Signup</button>
+                <p id="signupMsg"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Product Page -->
+    <div class="product-page">
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner" class="loading-container">
+            <div class="spinner"></div>
+            <p>Loading product...</p>
+        </div>
+
+        <!-- Product Not Found -->
+        <div id="productNotFound" class="not-found-container" style="display: none;">
+            <div class="container">
+                <h2>Product Not Found</h2>
+                <p>The product you're looking for doesn't exist.</p>
+                <a href="index.html" class="btn-back">Back to Home</a>
+            </div>
+        </div>
+
+        <!-- Product Content -->
+        <div id="productMain" class="product-container" style="display: none;">
+            <div class="product-layout">
+                <!-- Left Side - Product Images -->
+                <div class="product-images">
+                    <div class="thumbnail-column">
+                        <img src="" class="thumbnail active" data-image="1">
+                        <img src="" class="thumbnail" data-image="2">
+                        <img src="" class="thumbnail" data-image="3">
+                        <img src="" class="thumbnail" data-image="4">
+                        <img src="" class="thumbnail" data-image="5">
+                        <img src="" class="thumbnail" data-image="6">
+                    </div>
+                    <div class="main-image-container">
+                        <img id="mainImage" src="" alt="Product Image" class="main-image">
+                    </div>
+                </div>
+
+                <!-- Right Side - Product Info -->
+                <div class="product-info">
+                    <h1 id="productTitle" class="product-title">OVERSIZED HOODIE</h1>
+                    
+                    <div class="rating">
+                        <div class="stars">★★★★★</div>
+                        <span class="rating-text">24 Reviews</span>
+                    </div>
+
+                    <div class="price-container">
+                        <span id="productPrice" class="current-price">Rs.2500.00</span>
+                        <span class="original-price">Rs.2800.00</span>
+                        <span class="discount">10% OFF</span>
+                    </div>
+
+                    <!-- Color Selection -->
+                    <div class="color-section">
+                        <div class="section-title">Color: <span id="selectedColor">Black</span></div>
+                        <div class="color-options">
+                            <div class="color-option color-black active" data-color="black"></div>
+                            <div class="color-option color-white" data-color="white"></div>
+                        </div>
+                    </div>
+
+                    <!-- Size Selection -->
+                    <div class="size-section">
+                        <div class="section-title">Size: <span class="size-guide">Size Guide</span></div>
+                        <div id="sizeOptions" class="size-options">
+                            <div class="size-option" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option active" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+
+                    <!-- Add to Cart -->
+                    <div class="add-to-cart-section">
+                        <button id="addToCartBtn" class="add-to-cart-btn">ADD TO CART</button>
+                    </div>
+
+                    <!-- Product Details Sections -->
+                    <div class="product-details-sections">
+                        <div class="detail-section">
+                            <div class="detail-header">
+                                <span>DESCRIPTION</span>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="detail-content" id="productDescription">
+                                Premium quality hoodie perfect for workouts and casual wear. Made with high-quality cotton blend for maximum comfort and durability.
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <div class="detail-header">
+                                <span>FIT & FEATURES</span>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="detail-content">
+                                • Oversized fit for comfort<br>
+                                • Premium cotton blend fabric<br>
+                                • Adjustable drawstring hood<br>
+                                • Kangaroo pocket<br>
+                                • Ribbed cuffs and hem
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <div class="detail-header">
+                                <span>MATERIALS & CARE</span>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="detail-content">
+                                80% Cotton, 20% Polyester<br>
+                                Machine wash cold<br>
+                                Tumble dry low<br>
+                                Do not bleach
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <div class="detail-header">
+                                <span>DELIVERY</span>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="detail-content">
+                                Free delivery on orders over Rs.5000<br>
+                                Standard delivery: 3-5 business days<br>
+                                Express delivery: 1-2 business days
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Banner -->
+            <div class="hero-banner">
+                <div class="hero-text">
+                    A HEAVY, SOFT CALISTHENICS-INSPIRED HOODIE FOR WORKOUTS & EVERYDAY LIFE.
+                </div>
+            </div>
+
+            <!-- Related Products -->
+            <div id="relatedProducts" class="related-products" style="display: none;">
+                <h2 class="section-heading">YOU MIGHT ALSO LIKE</h2>
+                <div id="relatedProductsGrid" class="products-grid">
+                    <!-- Related products will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-dumbbell"></i>
+                        <h3>Powertain.Fitness</h3>
+                    </div>
+                    <p>Premium fitness equipment and apparel designed by athletes, for athletes.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>QUICK LINKS</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="clothing.html">Clothing</a></li>
+                        <li><a href="equipment.html">Equipment</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>CONTACT</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> Powertain@gmail.com</p>
+                        <p><i class="fas fa-phone"></i> 077 123 123 456</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 413/A Harwela, Sri Lanka</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Powertain.Fitness. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+
+        // Quantity controls
+        const minusBtn = document.querySelector('.minus-btn');
+        const plusBtn = document.querySelector('.plus-btn');
+        const quantityInput = document.querySelector('.quantity-input');
+
+        minusBtn.addEventListener('click', () => {
+            let currentValue = parseInt(quantityInput.value);
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        });
+
+        plusBtn.addEventListener('click', () => {
+            let currentValue = parseInt(quantityInput.value);
+            if (currentValue < 10) {
+                quantityInput.value = currentValue + 1;
+            }
+        });
+
+        quantityInput.addEventListener('change', () => {
+            let value = parseInt(quantityInput.value);
+            if (value < 1) {
+                quantityInput.value = 1;
+            } else if (value > 10) {
+                quantityInput.value = 10;
+            }
+        });
+
+        // Enhanced image interactions
+        document.querySelectorAll('.image-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+                this.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.15)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+                this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+            });
+        });
+
+        // Wishlist functionality
+        document.querySelectorAll('.wishlist-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.classList.toggle('active');
+                
+                const icon = this.querySelector('i');
+                if (this.classList.contains('active')) {
+                    icon.className = 'fas fa-heart';
+                    showNotification('Added to wishlist!');
+                } else {
+                    icon.className = 'far fa-heart';
+                    showNotification('Removed from wishlist!');
+                }
+            });
+        });
+
+        // Zoom functionality
+        document.querySelectorAll('.zoom-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                showImageModal(this.closest('.image-item'));
+            });
+        });
+
+        // Notification system
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #dc2626;
+                color: white;
+                padding: 15px 20px;
+                border-radius: 5px;
+                z-index: 1000;
+                animation: slideInRight 0.3s ease-out;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease-out';
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 2000);
+        }
+
+        // Image modal
+        function showImageModal(imageItem) {
+            const modal = document.createElement('div');
+            modal.className = 'image-modal';
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.9);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000;
+                cursor: pointer;
+            `;
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                max-width: 90%;
+                max-height: 90%;
+                background: white;
+                border-radius: 10px;
+                overflow: hidden;
+                position: relative;
+            `;
+            
+            const closeBtn = document.createElement('button');
+            closeBtn.innerHTML = '×';
+            closeBtn.style.cssText = `
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: rgba(0, 0, 0, 0.5);
+                color: white;
+                border: none;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                font-size: 20px;
+                cursor: pointer;
+                z-index: 1001;
+            `;
+            
+            modalContent.appendChild(closeBtn);
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            
+            closeBtn.addEventListener('click', () => {
+                modal.remove();
+            });
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+        }
+
+        // Enhanced add to cart with animation
+        document.querySelector('.add-to-cart').addEventListener('click', function() {
+            const selectedSize = document.querySelector('.size-btn.active');
+            const quantity = document.querySelector('.quantity-input').value;
+            
+            if (!selectedSize) {
+                showNotification('Please select a size!');
+                return;
+            }
+            
+            // Add cart animation
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 150);
+            
+            showNotification(`Added ${quantity} item(s) to cart!`);
+        });
+
+        // Scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.product-info, .image-grid, .product-details');
+            elements.forEach(element => {
+                element.classList.add('animate-on-scroll');
+                observer.observe(element);
+            });
+        });
+
+        // Add CSS for animations
+        const style = document.createElement('style');
+        style.textContent = `
+            .animate-on-scroll {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: all 0.8s ease-out;
+            }
+            
+            .animate-on-scroll.animate-in {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                }
+                to {
+                    transform: translateX(0);
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                }
+                to {
+                    transform: translateX(100%);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Color selection
+        const colorThumbs = document.querySelectorAll('.color-thumb');
+        colorThumbs.forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                colorThumbs.forEach(t => t.classList.remove('active'));
+                thumb.classList.add('active');
+            });
+        });
+
+        // Accordion functionality
+        const detailHeaders = document.querySelectorAll('.detail-header');
+        detailHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const section = header.parentElement;
+                const content = section.querySelector('.detail-content');
+                const icon = header.querySelector('i');
+                
+                // Close all other sections
+                detailHeaders.forEach(h => {
+                    if (h !== header) {
+                        const otherSection = h.parentElement;
+                        const otherContent = otherSection.querySelector('.detail-content');
+                        const otherIcon = h.querySelector('i');
+                        otherContent.classList.remove('active');
+                        otherIcon.classList.remove('fa-minus');
+                        otherIcon.classList.add('fa-plus');
+                    }
+                });
+                
+                // Toggle current section
+                content.classList.toggle('active');
+                if (content.classList.contains('active')) {
+                    icon.classList.remove('fa-plus');
+                    icon.classList.add('fa-minus');
+                } else {
+                    icon.classList.remove('fa-minus');
+                    icon.classList.add('fa-plus');
+                }
+            });
+        });
+
+        // Add to cart functionality
+        const addToCartBtn = document.querySelector('.add-to-cart');
+        addToCartBtn.addEventListener('click', () => {
+            addToCartBtn.textContent = 'ADDED TO CART';
+            addToCartBtn.style.background = '#dc2626';
+            setTimeout(() => {
+                addToCartBtn.textContent = 'ADD TO CART';
+                addToCartBtn.style.background = '#000';
+            }, 2000);
+        });
+
+        // Login modal toggle
+        (function initLoginModal(){
+            const userIcon = document.querySelector('.nav-icons .fa-user');
+            const modal = document.getElementById('loginModal');
+            const closeBtn = modal ? modal.querySelector('.login-close') : null;
+            const content = modal ? modal.querySelector('.login-modal-content') : null;
+
+            if (!userIcon || !modal) { return; }
+
+            function openModal(){ modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+            function closeModal(){ modal.style.display = 'none'; document.body.style.overflow = ''; }
+
+            userIcon.addEventListener('click', openModal);
+            if (closeBtn) closeBtn.addEventListener('click', closeModal);
+            if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+            if (content) content.addEventListener('click', (e) => e.stopPropagation());
+
+            const form = document.getElementById('loginForm');
+            if (form) {
+                form.addEventListener('submit', function(e){
+                    e.preventDefault();
+                    closeModal();
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Include JavaScript files -->
+    <script src="JS/cart.js"></script>
+    <script src="JS/Home.js"></script>
+    <script src="JS/product.js"></script>
+</body>
+</html>

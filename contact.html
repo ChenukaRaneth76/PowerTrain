@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Powertain.Fitness</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="CSS/contact.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="IMG/logo1.png" alt="Powertain.Fitness" class="nav-logo-img">
+                <h2>Powertain.Fitness</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html">ABOUT US</a></li>
+                <li><a href="contact.html" class="active">CONTACT</a></li>
+                <li><a href="clothing.html">CLOTHING</a></li>
+                <li><a href="equipment.html">EQUIPMENT</a></li>
+            </ul>
+            <div class="nav-icons">
+                <i class="fas fa-user" id="openAuth"></i>
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="auth-modal-overlay">
+        <div class="auth-box">
+            <button class="auth-close">&times;</button>
+            <div class="auth-tabs">
+                <button id="loginTab" class="tab active">Login</button>
+                <button id="signupTab" class="tab">Signup</button>
+            </div>
+            <form id="loginForm" class="auth-form active">
+                <h3>Welcome Back</h3>
+                <input type="email" id="loginEmail" name="email" placeholder="Email" required>
+                <input type="password" id="loginPassword" name="password" placeholder="Password" required>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <p id="loginMsg"></p>
+            </form>
+            <form id="signupForm" class="auth-form">
+                <h3>Create Account</h3>
+                <input type="text" id="signupUsername" name="username" placeholder="Username" required>
+                <input type="email" id="signupEmail" name="email" placeholder="Email" required>
+                <input type="password" id="signupPassword" name="password" placeholder="Password" required>
+                <input type="password" id="signupConfirm" placeholder="Confirm Password" required>
+                <button type="submit" class="btn btn-primary">Signup</button>
+                <p id="signupMsg"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="contact-page-hero">
+        <div class="contact-hero-content">
+            <div class="subtitle">Let's Talk</div>
+            <h1>CONTACT US</h1>
+            <p>We're here to answer your questions about our products, training programs, or anything else. Drop us a message and we'll get back to you within 24 hours.</p>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <div class="contact-container">
+        <div class="contact-main-grid">
+            <!-- Form Section -->
+            <div class="contact-form-section">
+                <h2>Send Us A Message</h2>
+                <p class="form-subtitle">Fill out the form below and our team will respond shortly.</p>
+                <form id="contactForm">
+                    <div class="form-row">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="What is this about?" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" placeholder="Tell us more..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+
+            <!-- Info Section -->
+            <div class="contact-info-section">
+                <!-- Contact Details Card -->
+                <div class="info-card">
+                    <h3><i class="fas fa-map-marker-alt"></i> Visit Us</h3>
+                    <div class="info-detail">
+                        <i class="fas fa-location-dot"></i>
+                        <div>
+                            <h4>Our Location</h4>
+                            <p>Hanwella Colombo<br>Sri Lanka</p>
+                        </div>
+                    </div>
+                    <div class="info-detail">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone Number</h4>
+                            <p>0713293562 | 0763517172</p>
+                        </div>
+                    </div>
+                    <div class="info-detail">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email Address</h4>
+                            <p>powertainfitnesslk@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hours Card -->
+                <div class="info-card">
+                    <h3><i class="fas fa-clock"></i> Working Hours</h3>
+                    <div class="info-detail">
+                        <i class="fas fa-calendar-days"></i>
+                        <div>
+                            <h4>Monday - Saturday</h4>
+                            <p>8:00 AM - 9:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="info-detail">
+                        <i class="fas fa-calendar-xmark"></i>
+                        <div>
+                            <h4>Sunday</h4>
+                            <p>Closed</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map Section -->
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126743.89854264103!2d79.77380279999999!3d6.921837099999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae253d10f7a7003%3A0x320b2e4d32d3838d!2sColombo%2C%20Sri%20Lanka!5e0!3m2!1sen!2sus!4v1699999999999!5m2!1sen!2sus" allowfullscreen="" loading="lazy" title="Powertain.Fitness Location"></iframe>
+        </div>
+    </div>
+
+   <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                        <div class="nav-logo">
+                        <img src="IMG/logo1.png" alt="Calisthenics.Co" class="nav-logo-img">
+                        <h3>Powertain.Fitness</h3>
+                    </div>
+                    <p>We're a community built on strength, movement, and discipline. Our handcrafted equipment and performance apparel are designed to help you achieve your calisthenics goals.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>USEFUL LINKS</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#equipment">Equipment's</a></li>
+                        <li><a href="#products">Clothing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>CONTACT US</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>powertainfitnesslk@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>0713293562 | 0763517172 </span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Hanwella Colombo, Sri Lanka</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Powertain.Fitness All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="JS/Home.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Message sent successfully! We\'ll get back to you soon.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

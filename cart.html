@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Powertain.Fitness</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f5f5f5;
+        }
+
+        .cart-container {
+            max-width: 1200px;
+            margin: 100px auto 50px;
+            padding: 20px;
+        }
+
+        .cart-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .cart-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .cart-content {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+        }
+
+        .cart-items {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+
+        .cart-item:hover {
+            background: #f9f9f9;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-image {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .item-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .item-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .item-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f5f5f5;
+            padding: 5px 10px;
+            border-radius: 8px;
+        }
+
+        .quantity-control button {
+            width: 30px;
+            height: 30px;
+            border: none;
+            background: #000;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .quantity-control button:hover {
+            background: #333;
+        }
+
+        .quantity-control span {
+            min-width: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .remove-btn {
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px 10px;
+        }
+
+        .remove-btn:hover {
+            color: #dc2626;
+        }
+
+        .cart-summary {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #000;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 18px;
+            background: #000;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .checkout-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 15px;
+        }
+
+        .empty-cart i {
+            font-size: 5rem;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        .empty-cart h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .empty-cart p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .continue-shopping {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #000;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .continue-shopping:hover {
+            background: #333;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #000;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 968px) {
+            .cart-content {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-summary {
+                position: static;
+            }
+
+            .cart-item {
+                flex-direction: column;
+            }
+
+            .item-image {
+                width: 100%;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+  <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="IMG/logo1.png" alt="Calisthenics.Co" class="nav-logo-img">
+                <h2>Powertain.Fitness</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html">ABOUT US</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+                <li><a href="clothing.html">CLOTHING</a></li>
+                <li><a href="equipment.html">EQUIPMENT</a></li>
+            </ul>
+            
+            <div class="nav-icons">
+                <i class="fas fa-user" id="openAuth"></i>
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="cart-container">
+        <div class="cart-header">
+            <h1>SHOPPING CART</h1>
+            <p id="itemCount">Loading...</p>
+        </div>
+
+        <div id="loadingCart" class="loading">
+            <div class="spinner"></div>
+            <p>Loading your cart...</p>
+        </div>
+
+        <div id="cartContent" style="display: none;">
+            <div class="cart-content">
+                <div class="cart-items" id="cartItems">
+                    <!-- Cart items will be loaded here -->
+                </div>
+
+                <div class="cart-summary">
+                    <h2 class="summary-title">ORDER SUMMARY</h2>
+                    
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">Rs.0.00</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span>Shipping:</span>
+                        <span id="shipping">Rs.500.00</span>
+                    </div>
+                    
+                    <div class="summary-total">
+                        <span>Total:</span>
+                        <span id="total">Rs.0.00</span>
+                    </div>
+
+                    <button class="checkout-btn" id="checkoutBtn" onclick="proceedToCheckout()">
+                        PROCEED TO CHECKOUT
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="emptyCart" class="empty-cart" style="display: none;">
+            <i class="fas fa-shopping-cart"></i>
+            <h2>Your Cart is Empty</h2>
+            <p>Add some items to get started!</p>
+            <a href="clothing.html" class="continue-shopping">SHOP NOW</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                        <div class="nav-logo">
+                        <img src="IMG/logo1.png" alt="Calisthenics.Co" class="nav-logo-img">
+                        <h3>Powertain.Fitness</h3>
+                    </div>
+                    <p>We're a community built on strength, movement, and discipline. Our handcrafted equipment and performance apparel are designed to help you achieve your calisthenics goals.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>USEFUL LINKS</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#equipment">Equipment's</a></li>
+                        <li><a href="#products">Clothing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>CONTACT US</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>powertainfitnesslk@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>0713293562 | 0763517172 </span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Hanwella Colombo, Sri Lanka</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Powertain.Fitness All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="JS/cart.js"></script>
+    <script>
+        // Load cart items
+        async function loadCart() {
+            const cartData = await getCartItems();
+            const loadingCart = document.getElementById('loadingCart');
+            const cartContent = document.getElementById('cartContent');
+            const emptyCart = document.getElementById('emptyCart');
+            const itemCount = document.getElementById('itemCount');
+            
+            loadingCart.style.display = 'none';
+            
+            if (cartData.items.length === 0) {
+                emptyCart.style.display = 'block';
+                itemCount.textContent = '0 items';
+            } else {
+                cartContent.style.display = 'block';
+                itemCount.textContent = `${cartData.count} item${cartData.count > 1 ? 's' : ''}`;
+                displayCartItems(cartData);
+            }
+        }
+
+        function displayCartItems(cartData) {
+            const cartItems = document.getElementById('cartItems');
+            const subtotalEl = document.getElementById('subtotal');
+            const totalEl = document.getElementById('total');
+            
+            const shippingCost = 500;
+            const total = cartData.total + shippingCost;
+            
+            // Debug: Log cart items to see image paths
+            console.log('Cart items:', cartData.items);
+            
+            cartItems.innerHTML = cartData.items.map(item => {
+                // Debug: Log EVERYTHING about this item
+                console.log('=== CART ITEM DEBUG ===');
+                console.log('Product Name:', item.product_name);
+                console.log('Product Type:', item.product_type);
+                console.log('Product Image RAW:', item.product_image);
+                console.log('Image is empty?', !item.product_image);
+                console.log('Image is null string?', item.product_image === 'null');
+                console.log('Image is 0?', item.product_image === '0');
+                console.log('======================');
+                
+                // Fix image path - ensure it has correct path
+                let imageSrc = item.product_image;
+                
+                // Only use fallback if TRULY empty
+                if (!imageSrc || imageSrc === '' || imageSrc === 'null' || imageSrc === '0' || imageSrc === 'undefined') {
+                    console.warn(' No valid image, using logo fallback for:', item.product_name);
+                    imageSrc = 'IMG/logo1.png';
+                }
+                // If image path doesn't start with IMG/, uploads/, or http, assume it needs IMG/ prefix
+                else if (!imageSrc.startsWith('IMG/') && !imageSrc.startsWith('uploads/') && !imageSrc.startsWith('http')) {
+                    console.log('Adding IMG/ prefix to:', imageSrc);
+                    imageSrc = 'IMG/' + imageSrc;
+                }
+                
+                console.log(' Final image source:', imageSrc);
+                
+                // Check if product is equipment (hide size/color for equipment)
+                const isEquipment = item.product_type === 'equipment';
+                
+                return `
+                    <div class="cart-item" data-cart-id="${item.id}">
+                        <img src="${imageSrc}" 
+                             alt="${item.product_name}" 
+                             class="item-image"
+                             onerror="this.src='IMG/logo1.png'; console.error('Failed to load image: ${imageSrc}');">
+                        <div class="item-details">
+                            <div class="item-name">${item.product_name}</div>
+                            <div class="item-meta">
+                                ${!isEquipment && item.size ? `<span style="background: #f3f4f6; padding: 4px 8px; border-radius: 4px; font-weight: 600; margin-right: 8px;">Size: ${item.size}</span>` : ''}
+                                ${!isEquipment && item.color ? `<span style="background: #f3f4f6; padding: 4px 8px; border-radius: 4px; font-weight: 600;">Color: ${item.color}</span>` : ''}
+                            </div>
+                            <div class="item-price">Rs.${parseFloat(item.product_price).toFixed(2)}</div>
+                        </div>
+                        <div class="item-actions">
+                            <div class="quantity-control">
+                                <button onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                                <span>${item.quantity}</span>
+                                <button onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                            </div>
+                            <button class="remove-btn" onclick="removeItem(${item.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            subtotalEl.textContent = `Rs.${cartData.total.toFixed(2)}`;
+            totalEl.textContent = `Rs.${total.toFixed(2)}`;
+        }
+
+        async function updateQuantity(cartId, newQuantity) {
+            if (newQuantity < 1) return;
+            const success = await updateCartQuantity(cartId, newQuantity);
+            if (success) {
+                loadCart();
+            }
+        }
+
+        async function removeItem(cartId) {
+            if (confirm('Remove this item from cart?')) {
+                const success = await removeFromCart(cartId);
+                if (success) {
+                    loadCart();
+                }
+            }
+        }
+
+        function proceedToCheckout() {
+            window.location.href = 'checkout.html';
+        }
+
+        // Load cart on page load
+        document.addEventListener('DOMContentLoaded', loadCart);
+    </script>
+</body>
+</html>

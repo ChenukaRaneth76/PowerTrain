@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Powertain.Fitness</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f5f5f5;
+        }
+
+        .checkout-container {
+            max-width: 1200px;
+            margin: 100px auto 50px;
+            padding: 20px;
+        }
+
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .checkout-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .checkout-steps {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background: #e5e5e5;
+            color: #999;
+            font-weight: 600;
+        }
+
+        .step.active {
+            background: #000;
+            color: white;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: white;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .step.active .step-number {
+            background: #fff;
+            color: #000;
+        }
+
+        .checkout-content {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+        }
+
+        .checkout-form {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #000;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e5e5e5;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #000;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .bank-details {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+
+        .bank-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #000;
+        }
+
+        .bank-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .bank-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .bank-row:last-child {
+            border-bottom: none;
+        }
+
+        .bank-label {
+            font-weight: 600;
+            color: #666;
+        }
+
+        .bank-value {
+            font-weight: 700;
+            color: #000;
+        }
+
+        .upload-section {
+            margin-top: 25px;
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        .file-upload-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px;
+            background: #000;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload-btn:hover {
+            background: #333;
+        }
+
+        .file-name {
+            margin-top: 10px;
+            padding: 10px;
+            background: #e5f5e5;
+            border-radius: 5px;
+            color: #10b981;
+            font-weight: 600;
+            display: none;
+        }
+
+        .preview-image {
+            max-width: 100%;
+            max-height: 300px;
+            margin-top: 15px;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .order-summary {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .summary-items {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .summary-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-item-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .summary-item-details {
+            flex: 1;
+        }
+
+        .summary-item-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .summary-item-meta {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .summary-item-price {
+            font-weight: 700;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #000;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .place-order-btn {
+            width: 100%;
+            padding: 18px;
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .place-order-btn:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16,185,129,0.3);
+        }
+
+        .place-order-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c33;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-modal.show {
+            display: flex;
+        }
+
+        .success-content {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            animation: slideUp 0.5s ease;
+        }
+
+        .success-icon {
+            font-size: 5rem;
+            color: #10b981;
+            margin-bottom: 20px;
+        }
+
+        .success-content h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .success-content p {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .order-number {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .success-btn {
+            padding: 15px 40px;
+            background: #000;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .success-btn:hover {
+            background: #333;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 968px) {
+            .checkout-content {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                position: static;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .checkout-steps {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="checkout-container">
+        <div class="checkout-header">
+            <h1>CHECKOUT</h1>
+        </div>
+
+        <div class="checkout-steps">
+            <div class="step active">
+                <span class="step-number">1</span>
+                <span>Customer Details</span>
+            </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                <span>Payment</span>
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <span>Confirmation</span>
+            </div>
+        </div>
+
+        <div class="checkout-content">
+            <div class="checkout-form">
+                <form id="checkoutForm" enctype="multipart/form-data">
+                    <div class="section-title">Customer Information</div>
+                    
+                    <div class="form-group">
+                        <label for="customerName">Full Name *</label>
+                        <input type="text" id="customerName" name="customerName" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerEmail">Email Address *</label>
+                            <input type="email" id="customerEmail" name="customerEmail" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="customerPhone">Phone Number *</label>
+                            <input type="tel" id="customerPhone" name="customerPhone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customerAddress">Delivery Address *</label>
+                        <textarea id="customerAddress" name="customerAddress" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="postalCode">Postal Code *</label>
+                        <input type="text" id="postalCode" name="postalCode" required>
+                    </div>
+
+                    <div class="section-title" style="margin-top: 40px;">Bank Transfer Details</div>
+
+                    <div class="bank-details">
+                        <h3>Please transfer to:</h3>
+                        <div class="bank-info">
+                            <div class="bank-row">
+                                <span class="bank-label">Bank Name:</span>
+                                <span class="bank-value">Commercial Bank</span>
+                            </div>
+                            <div class="bank-row">
+                                <span class="bank-label">Account Name:</span>
+                                <span class="bank-value">Powertain Fitness</span>
+                            </div>
+                            <div class="bank-row">
+                                <span class="bank-label">Account Number:</span>
+                                <span class="bank-value">1234567890</span>
+                            </div>
+                            <div class="bank-row">
+                                <span class="bank-label">Branch:</span>
+                                <span class="bank-value">Colombo Main</span>
+                            </div>
+                            <div class="bank-row">
+                                <span class="bank-label">Total Amount:</span>
+                                <span class="bank-value" id="totalAmount">Rs.0.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="upload-section">
+                        <div class="form-group">
+                            <label>Upload Payment Slip *</label>
+                            <div class="file-upload">
+                                <input type="file" id="paymentSlip" name="paymentSlip" accept="image/*" required>
+                                <label for="paymentSlip" class="file-upload-btn">
+                                    <i class="fas fa-upload"></i>
+                                    <span>Choose Payment Slip Image</span>
+                                </label>
+                            </div>
+                            <div class="file-name" id="fileName"></div>
+                            <img id="previewImage" class="preview-image" alt="Payment Slip Preview">
+                        </div>
+                    </div>
+
+                    <div class="error-message" id="errorMessage"></div>
+
+                    <button type="submit" class="place-order-btn" id="placeOrderBtn">
+                        PLACE ORDER
+                    </button>
+                </form>
+            </div>
+
+            <div class="order-summary">
+                <h2 class="summary-title">Order Summary</h2>
+                
+                <div class="summary-items" id="summaryItems">
+                    <!-- Items will be loaded here -->
+                </div>
+
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">Rs.0.00</span>
+                </div>
+                
+                <div class="summary-row">
+                    <span>Shipping:</span>
+                    <span id="shipping">Rs.500.00</span>
+                </div>
+                
+                <div class="summary-total">
+                    <span>Total:</span>
+                    <span id="total">Rs.0.00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="success-modal" id="successModal">
+        <div class="success-content">
+            <i class="fas fa-check-circle success-icon"></i>
+            <h2>Order Placed Successfully!</h2>
+            <p>Thank you for your order. We've received your payment slip and will review it shortly.</p>
+            <div class="order-number">
+                Order #: <span id="orderNumberDisplay"></span>
+            </div>
+            <p>A confirmation email has been sent to your email address.</p>
+            <a href="index.html" class="success-btn">BACK TO HOME</a>
+        </div>
+    </div>
+
+    <script src="JS/cart.js"></script>
+    <script>
+        let cartData = null;
+        const shippingCost = 500;
+
+        // Load order summary
+        async function loadOrderSummary() {
+            cartData = await getCartItems();
+            
+            if (cartData.items.length === 0) {
+                window.location.href = 'cart.html';
+                return;
+            }
+
+            const summaryItems = document.getElementById('summaryItems');
+            const subtotalEl = document.getElementById('subtotal');
+            const totalEl = document.getElementById('total');
+            const totalAmountEl = document.getElementById('totalAmount');
+            
+            const total = cartData.total + shippingCost;
+            
+            summaryItems.innerHTML = cartData.items.map(item => {
+                // Fix image path
+                let imageSrc = item.product_image;
+                if (!imageSrc || imageSrc === '' || imageSrc === 'null' || imageSrc === '0') {
+                    imageSrc = 'IMG/clo1.webp';
+                } else if (!imageSrc.startsWith('IMG/') && !imageSrc.startsWith('uploads/') && !imageSrc.startsWith('http')) {
+                    imageSrc = 'IMG/' + imageSrc;
+                }
+                
+                return `
+                    <div class="summary-item">
+                        <img src="${imageSrc}" 
+                             alt="${item.product_name}" 
+                             class="summary-item-image"
+                             onerror="this.src='IMG/clo1.webp';">
+                        <div class="summary-item-details">
+                            <div class="summary-item-name">${item.product_name}</div>
+                            <div class="summary-item-meta">
+                                Qty: ${item.quantity} 
+                                ${item.size ? `| Size: ${item.size}` : ''}
+                            </div>
+                            <div class="summary-item-price">Rs.${item.subtotal.toFixed(2)}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            subtotalEl.textContent = `Rs.${cartData.total.toFixed(2)}`;
+            totalEl.textContent = `Rs.${total.toFixed(2)}`;
+            totalAmountEl.textContent = `Rs.${total.toFixed(2)}`;
+        }
+
+        // Handle file upload preview
+        document.getElementById('paymentSlip').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                document.getElementById('fileName').textContent = file.name;
+                document.getElementById('fileName').style.display = 'block';
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('previewImage');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Handle form submission
+        document.getElementById('checkoutForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('placeOrderBtn');
+            const errorMsg = document.getElementById('errorMessage');
+            
+            btn.disabled = true;
+            btn.textContent = 'PROCESSING ORDER...';
+            errorMsg.style.display = 'none';
+
+            try {
+                const formData = new FormData();
+                formData.append('customer_name', document.getElementById('customerName').value);
+                formData.append('customer_email', document.getElementById('customerEmail').value);
+                formData.append('customer_phone', document.getElementById('customerPhone').value);
+                formData.append('customer_address', document.getElementById('customerAddress').value);
+                formData.append('postal_code', document.getElementById('postalCode').value);
+                formData.append('total_amount', cartData.total + shippingCost);
+                formData.append('payment_slip', document.getElementById('paymentSlip').files[0]);
+                formData.append('cart_items', JSON.stringify(cartData.items));
+
+                console.log('Submitting order with:', {
+                    customer_name: document.getElementById('customerName').value,
+                    customer_email: document.getElementById('customerEmail').value,
+                    total: cartData.total + shippingCost,
+                    items_count: cartData.items.length
+                });
+
+                const response = await fetch('backend/orders.php?action=create', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                console.log('Response status:', response.status);
+                const responseText = await response.text();
+                console.log('Response text:', responseText);
+                
+                let data;
+                try {
+                    data = JSON.parse(responseText);
+                } catch (parseError) {
+                    console.error('JSON parse error:', parseError);
+                    throw new Error('Invalid server response: ' + responseText.substring(0, 100));
+                }
+
+                if (data.status === 'success') {
+                    // Clear cart
+                    await clearCart();
+                    
+                    // Show success modal
+                    document.getElementById('orderNumberDisplay').textContent = data.order_number;
+                    document.getElementById('successModal').classList.add('show');
+                } else {
+                    errorMsg.textContent = data.message || 'Failed to place order. Please try again.';
+                    errorMsg.style.display = 'block';
+                    btn.disabled = false;
+                    btn.textContent = 'PLACE ORDER';
+                }
+            } catch (error) {
+                console.error('Error placing order:', error);
+                errorMsg.textContent = error.message || 'An error occurred. Please try again.';
+                errorMsg.style.display = 'block';
+                btn.disabled = false;
+                btn.textContent = 'PLACE ORDER';
+            }
+        });
+
+        // Load order summary on page load
+        document.addEventListener('DOMContentLoaded', loadOrderSummary);
+    </script>
+</body>
+</html>

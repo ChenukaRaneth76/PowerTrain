@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Powertain.Fitness - Train Hard. Move Free.</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="IMG/logo1.png" alt="Calisthenics.Co" class="nav-logo-img">
+                <h2>Powertain.Fitness</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html">ABOUT US</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+                <li><a href="clothing.html">CLOTHING</a></li>
+                <li><a href="equipment.html">EQUIPMENT</a></li>
+            </ul>
+            
+            <div class="nav-icons">
+                <i class="fas fa-user" id="openAuth"></i>
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login/Signup Modal -->
+<div id="authModal" class="auth-modal-overlay">
+  <div class="auth-box">
+    <button class="auth-close">&times;</button>
+
+    <div class="auth-tabs">
+      <button id="loginTab" class="tab active">Login</button>
+      <button id="signupTab" class="tab">Signup</button>
+    </div>
+
+    <!-- Login Form -->
+   <form id="loginForm" class="auth-form active">
+  <h3>Welcome Back</h3>
+  <input type="email" id="loginEmail" name="email" placeholder="Email" required>
+  <input type="password" id="loginPassword" name="password" placeholder="Password" required>
+  <button type="submit" class="btn btn-primary">Login</button>
+  <p id="loginMsg"></p>
+</form>
+
+
+    <!-- Signup Form -->
+    <form id="signupForm" class="auth-form">
+    <h3>Create Account</h3>
+  <input type="text" id="signupUsername" name="username" placeholder="Username" required>
+  <input type="email" id="signupEmail" name="email" placeholder="Email" required>
+  <input type="password" id="signupPassword" name="password" placeholder="Password" required>
+  <input type="password" id="signupConfirm" placeholder="Confirm Password" required>
+  <button type="submit" class="btn btn-primary">Signup</button>
+  <p id="signupMsg"></p>
+    </form>
+
+  </div>
+</div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>TRAIN HARD</h1>
+            <h1>MOVE FREE.</h1>
+            <p>Elevate your fitness with calisthenics. Master bodyweight training for strength, skill, and freedom.</p>
+            <div class="hero-buttons">
+                <a href="equipment.html" class="btn btn-primary"><span>SHOP COLLECTION</span></a>
+                <a href="#training" class="btn btn-secondary"><span>JOIN TRAINING</span></a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="hero-circle"></div>
+            <div class="hero-photo"></div>
+        </div>
+        <div class="hero-social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+        </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section id="about" class="vision">
+        <div class="vision-bg"></div>
+        <div class="vision-content">
+            <h2>WHY CALISTHENICS?</h2>
+            <h3>OUR VISION</h3>
+            <p>We're more than a gym — we're a movement.<br><br>
+            Our mission is to empower athletes through calisthenics, mindset, and style.<br><br>
+            Every product and program we create is built to help you move freely, train smarter, and perform at your best becoming the ultimate "Fountain of Power" AKA POWERTAIN.</p>
+            
+            <div class="vision-grid">
+                <div class="vision-item">
+                    <div class="vision-image clothing"></div>
+                    <h4>CLOTHING</h4>
+                </div>
+                <div class="vision-item">
+                    <div class="vision-image equipment"></div>
+                    <h4>EQUIPMENT</h4>
+                </div>
+                <div class="vision-item">
+                    <div class="vision-image training"></div>
+                    <h4>TRAINING</h4>
+                </div>
+            </div>
+            
+            <a href="about.html" class="btn btn-primary">MORE ABOUT US</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <h2>TOP BRAND PRODUCTS</h2>
+            <div class="product-tabs">
+                <button class="tab-btn" data-tab="clothing">CLOTHING</button>
+                <button class="tab-btn active" data-tab="equipment">EQUIPMENT</button>
+                <button class="tab-btn" data-tab="training">TRAINING</button>
+            </div>
+            <div class="products-grid">
+
+                 <!-- Equipment Products (Hidden by default) -->
+                <div class="product-card" data-category="equipment" style="display: none;">
+                    <div class="product-image" style="background-image: url('IMG/iteam1.jpg')"></div>
+                    <h4>Classic pull-up Bar</h4>
+                    <p>RS.15900.00</p>
+                </div>
+                <div class="product-card" data-category="equipment" style="display: none;">
+                    <div class="product-image" style="background-image: url('IMG/iteam1.jpg')"></div>
+                    <h4>Resistance Bands</h4>
+                    <p>RS.1200.00</p>
+                </div>
+                <div class="product-card" data-category="equipment" style="display: none;">
+                    <div class="product-image" style="background-image: url('IMG/iteam2.jpg')"></div>
+                    <h4>Gymnastic Rings</h4>
+                    <p>RS.2800.00</p>
+                </div>
+                <div class="product-card" data-category="equipment" style="display: none;">
+                    <div class="product-image" style="background-image: url('IMG/iteam3.jpg')"></div>
+                    <h4>Premium High Parallettes</h4>
+                    <p>RS.19900.00</p>
+                </div>
+                <div class="product-card" data-category="equipment" style="display: none;">
+                    <div class="product-image" style="background-image: url('IMG/iteam4.jpg')"></div>
+                    <h4>Mini Parallettes</h4>
+                    <p>RS.5900.00</p>
+                </div>
+                <div class="product-card" data-category="equipment" style="display: none;">
+                    <div class="product-image" style="background-image: url('IMG/iteam5.jpg')"></div>
+                    <h4>Weight Vest</h4>
+                    <p>RS.5500.00</p>
+                </div>
+
+                <!-- Clothing Products -->
+                <div class="product-card" data-category="clothing">
+                    <a href="product.html" class="product-link">
+                        <div class="product-image hoodie"></div>
+                        <h4>Oversized Hoodie</h4>
+                        <p>RS.2500.00</p>
+                    </a>
+                </div>
+                <div class="product-card" data-category="clothing">
+                    <div class="product-image anime-shirt"></div>
+                    <h4>Anime Oversized T-Shirt</h4>
+                    <p>RS.1500.00</p>
+                </div>
+                <div class="product-card" data-category="clothing">
+                    <div class="product-image shorts">
+                        <span class="discount">20%</span>
+                    </div>
+                    <h4>Performance Shorts</h4>
+                    <p>RS.1800.00</p>
+                </div>
+                <div class="product-card" data-category="clothing">
+                    <div class="product-image t-shirt"></div>
+                    <h4>Oversized T-Shirt</h4>
+                    <p>RS.1500.00</p>
+                </div>
+                <div class="product-card" data-category="clothing">
+                    <div class="product-image tank">
+                        <span class="discount">20%</span>
+                    </div>
+                    <h4>United Tank</h4>
+                    <p>RS.1800.00</p>
+                </div>
+                <div class="product-card" data-category="clothing">
+                    <div class="product-image anime-tank"></div>
+                    <h4>Anime United Tank</h4>
+                    <p>RS.1800.00</p>
+                </div>
+
+               
+
+                <!-- Training Products (Hidden by default) -->
+                <div class="product-card" data-category="training" style="display: none;">
+                    <div class="product-image" style="background-image: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);"></div>
+                    <h4>Beginner Program</h4>
+                    <p>RS.5000.00</p>
+                </div>
+                <div class="product-card" data-category="training" style="display: none;">
+                    <div class="product-image" style="background-image: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);"></div>
+                    <h4>Advanced Skills</h4>
+                    <p>RS.8000.00</p>
+                </div>
+                <div class="product-card" data-category="training" style="display: none;">
+                    <div class="product-image" style="background-image: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);"></div>
+                    <h4>Strength Building</h4>
+                    <p>RS.6500.00</p>
+                </div>
+                <div class="product-card" data-category="training" style="display: none;">
+                    <div class="product-image" style="background-image: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);"></div>
+                    <h4>Flexibility Course</h4>
+                    <p>RS.4500.00</p>
+                </div>
+                <div class="product-card" data-category="training" style="display: none;">
+                    <div class="product-image" style="background-image: linear-gradient(135deg, #fdcbf1 0%, #e6dee9 100%);"></div>
+                    <h4>Handstand Mastery</h4>
+                    <p>RS.7000.00</p>
+                </div>
+                <div class="product-card" data-category="training" style="display: none;">
+                    <div class="product-image" style="background-image: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);"></div>
+                    <h4>Muscle-up Blueprint</h4>
+                    <p>RS.7500.00</p>
+                </div>
+            </div>
+            <div class="view-all">
+                <a href="equipment.html" class="btn btn-primary">VIEW ALL PRODUCTS →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose">
+        <div class="container">
+            <h2>WHY CHOOSE US</h2>
+            <div class="why-grid">
+                <div class="why-item">
+                    <i class="fas fa-tools"></i>
+                    <h3>Handcrafted Quality Equipment</h3>
+                    <p>Every piece of equipment is handmade with precision and tested by real athletes to ensure the highest quality standards.</p>
+                </div>
+                <div class="why-item">
+                    <i class="fas fa-lock"></i>
+                    <h3>Simple & Secure Payment</h3>
+                    <p>Choose from Cash on Delivery or secure Bank Transfer options. Your payment is always safe and protected.</p>
+                </div>
+                <div class="why-item">
+                    <i class="fas fa-globe"></i>
+                    <h3>Trusted by Real Athletes</h3>
+                    <p>Join our growing community of dedicated calisthenics athletes who trust our products and training programs.</p>
+                </div>
+            </div>
+            <div class="why-bg">WHY US</div>
+        </div>
+    </section>
+
+    <!-- Crew Section -->
+    <section class="crew">
+        <div class="container">
+            <h2>OUR CREW</h2>
+            <div class="crew-grid">
+                <div class="crew-member">
+                    <div class="crew-image hasitha"></div>
+                    <h3>HASITHA GUNAWARDENA</h3>
+                    <div class="crew-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/hazidubz?igsh=Mmx4N2V4OTdtdnB5"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="crew-member">
+                    <div class="crew-image ramudu"></div>
+                    <h3>RAMUTHU RIVISAHAN</h3>
+                    <div class="crew-social">
+                        <a href="https://www.facebook.com/profile.php?id=61559288996230"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/ramuthurivisahan?igsh=MWxtNm56Nnl3N2gybg=="><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="crew-member">
+                    <div class="crew-image nadun"></div>
+                    <h3>YASINDU BHARATHA</h3>
+                    <div class="crew-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>Reviews</h2>
+            <h3>WHAT CLIENTS SAY</h3>
+            <div class="testimonials-wrapper">
+                <div class="testimonials-slider">
+                    <!-- Slide 1 - First two cards -->
+                    <div class="testimonials-slide active" data-slide="0">
+                        <div class="testimonials-grid">
+                            <div class="testimonial-card">
+                                <div class="testimonial-bg"></div>
+                                <p>"The quality is next level! These handmade parallettes are exactly what I needed for my calisthenics journey."</p>
+                                <div class="testimonial-author">
+                                    <div class="author-image Tharaka"></div>
+                                    <div class="author-info">
+                                        <h4>Tharaka Madushan</h4>
+                                        <span>Fitness Influencer</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testimonial-card">
+                                <div class="testimonial-bg"></div>
+                                <p>"The training programs are top-notch! I went from zero pull-ups to 15 in just 3 months. Highly recommend!"</p>
+                                <div class="testimonial-author">
+                                    <div class="author-image Chamoj"></div>
+                                    <div class="author-info">
+                                        <h4>Chamoj Bnadara</h4>
+                                        <span>Calisthenics Coach</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 2 - Second two cards -->
+                    <div class="testimonials-slide" data-slide="1">
+                        <div class="testimonials-grid">
+                            <div class="testimonial-card">
+                                <div class="testimonial-bg"></div>
+                                <p>"Super comfortable oversized T-shirt! The fabric is premium quality and the customer support is amazing."</p>
+                                <div class="testimonial-author">
+                                    <div class="author-image Sandayuru"></div>
+                                    <div class="author-info">
+                                        <h4>Sandayuru Rupasingha</h4>
+                                        <span>Fitness Enthusiast</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testimonial-card">
+                                <div class="testimonial-bg"></div>
+                                <p>"Amazing equipment! The pull-up bar is incredibly sturdy and the installation was so easy. Best investment for my home gym."</p>
+                                <div class="testimonial-author">
+                                    <div class="author-image Dasun"></div>
+                                    <div class="author-info">
+                                        <h4>Dasun Wanasingha</h4>
+                                        <span>Calisthenics Athlete</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-dots">
+                <span class="dot active" data-slide="0"></span>
+                <span class="dot" data-slide="1"></span>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>HAVE ANY QUERIES ?</h2>
+            <h3>Contact Us Now</h3>
+            <div class="contact-content">
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <input type="text" placeholder="Subject" required>
+                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                    <button type="submit" class="btn btn-primary">SUBMIT</button>
+                </form>
+                <div class="contact-image-wrapper">
+                    <div class="contact-image">
+                        <div class="contact-figure"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                        <div class="nav-logo">
+                        <img src="IMG/logo1.png" alt="Calisthenics.Co" class="nav-logo-img">
+                        <h3>Powertain.Fitness</h3>
+                    </div>
+                    <p>We're a community built on strength, movement, and discipline. Our handcrafted equipment and performance apparel are designed to help you achieve your calisthenics goals.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>USEFUL LINKS</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#equipment">Equipment's</a></li>
+                        <li><a href="#products">Clothing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>CONTACT US</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>powertainfitnesslk@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>0713293562 | 0763517172 </span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Hanwella Colombo, Sri Lanka</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Powertain.Fitness All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="JS/Home.js"></script>
+</body>
+</html>

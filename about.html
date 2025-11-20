@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Powertain.Fitness</title>
+    <link rel="stylesheet" href="CSS/about-styles.css">
+    <link rel="stylesheet" href="CSS/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="IMG/logo1.png" alt="Powertain.Fitness" class="nav-logo-img" style="height: 40px;">
+                <h2>Powertain.Fitness</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html" class="active">ABOUT US</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+                <li><a href="clothing.html">CLOTHING</a></li>
+                <li><a href="equipment.html">EQUIPMENT'S</a></li>
+            </ul>
+            <div class="nav-icons">
+                <i class="fas fa-user"></i>
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="login-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:1100; align-items:center; justify-content:center;">
+        <div class="login-modal-content" style="background:#fff; width:90%; max-width:380px; border-radius:12px; box-shadow:0 20px 40px rgba(0,0,0,0.2); overflow:hidden; position:relative;">
+            <button class="login-close" aria-label="Close login" style="position:absolute; top:10px; right:12px; background:transparent; border:none; font-size:22px; cursor:pointer;">×</button>
+            <div style="padding:28px 24px 24px;">
+                <h3 style="margin:0 0 18px; font-family:Inter, sans-serif; font-weight:700; font-size:22px;">Sign in to Calisthenics.Co</h3>
+                <form id="loginForm">
+                    <div style="margin-bottom:14px;">
+                        <label for="loginEmail" style="display:block; margin-bottom:6px; font-size:13px; color:#444;">Email</label>
+                        <input id="loginEmail" type="email" required style="width:100%; padding:12px 12px; border:1px solid #ddd; border-radius:8px; font-size:14px;">
+                    </div>
+                    <div style="margin-bottom:16px;">
+                        <label for="loginPassword" style="display:block; margin-bottom:6px; font-size:13px; color:#444;">Password</label>
+                        <input id="loginPassword" type="password" required minlength="6" style="width:100%; padding:12px 12px; border:1px solid #ddd; border-radius:8px; font-size:14px;">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width:100%; padding:12px 14px; border:none; border-radius:8px; background:#000; color:#fff; font-weight:600; cursor:pointer;">Sign In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="hero-wave-bg"></div>
+        <div class="container">
+            <div class="hero-top-content">
+                <div class="hero-text-left">
+                    <h1>FOUNTAIN</h1>
+                    <h1>OF POWER.</h1>
+                </div>
+                <div class="hero-text-right">
+                    <p>Elevate your fitness with calisthenics. Master bodyweight training for strength, skill, and freedom.</p>
+                </div>
+            </div>
+            <div class="hero-image-container">
+                <img src="IMG/about.png" alt="Our Team" class="hero-team-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Story Section -->
+    <section class="company-story">
+        <div class="container">
+            <div class="story-content">
+                <div class="story-left">
+                    <h2 class="story-heading">ABOUT US</h2>
+                    <div class="story-image-wrapper">
+                        <img src="IMG/clothing.png" alt="Athlete" class="story-athlete-img">
+                    </div>
+                </div>
+                <div class="story-right">
+                    <div class="story-title">
+                        <h3>HELLO WE ARE</h3>
+                        <h2>POWERTAIN.FITNESS</h2>
+                    </div>
+                    <div class="story-text">
+                        <p>We're more than just a fitness brand — we're a movement built on strength, discipline, and passion. Inspired by calisthenics and functional training, we create premium, handmade equipment and high-quality athletic apparel designed by athletes, for athletes.</p>
+                        <p>Every product we make reflects our commitment to performance, comfort, and authenticity. Our goal is simple — to empower individuals to move freely, train harder, and live stronger, both in and out of the gym.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- Vision Section -->
+    <section id="about" class="vision">
+        <div class="vision-bg"></div>
+        <div class="vision-content">
+            <h2>WHY CALISTHENICS?</h2>
+            <h3>OUR VISION</h3>
+            <p>We're more than a gym — we're a movement.<br><br>
+            Our mission is to empower athletes through calisthenics, mindset, and style.<br><br>
+            Every product and program we create is built to help you move freely, train smarter, and perform at your best becoming the ultimate "Fountain of Power" AKA POWERTAIN.</p>
+            
+            <div class="vision-grid">
+                <div class="vision-item">
+                    <div class="vision-image clothing"></div>
+                    <h4>CLOTHING</h4>
+                </div>
+                <div class="vision-item">
+                    <div class="vision-image equipment"></div>
+                    <h4>EQUIPMENT</h4>
+                </div>
+                <div class="vision-item">
+                    <div class="vision-image training"></div>
+                    <h4>TRAINING</h4>
+                </div>
+            </div>
+            
+            <a href="about.html" class="btn btn-primary">MORE ABOUT US</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <div class="container">
+            <div class="products-content">
+                <div class="products-left">
+                    <div class="products-heading">
+                        <h3>CREATE</h3>
+                        <h2>THE</h2>
+                        <h1>FUTURE</h1>
+                    </div>
+                    <div class="products-image-wrapper">
+                        <img src="IMG/create.png" alt="Craftsman" class="products-craftsman-img">
+                    </div>
+                </div>
+                <div class="products-right">
+                    <h2 class="products-title">OUR PRODUCTS</h2>
+                    <div class="products-text">
+                        <p>Our products are built with purpose — combining function, comfort, and style for real athletes.</p>
+                        <p>Every piece of equipment is handcrafted with precision to deliver durability and performance you can trust, while our apparel blends premium materials with a clean, athletic design made for both training and everyday wear.</p>
+                        <p>From the bars to the streets, everything we create is designed to move with you — helping you train harder, recover better, and live stronger.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-section">
+        <div class="container">
+            <h2>WHY CHOOSE US</h2>
+            <div class="why-grid">
+                <div class="why-item">
+                    <i class="fas fa-tools"></i>
+                    <h3>HANDCRAFTED QUALITY EQUIPMENT</h3>
+                    <p>Every piece of equipment is handmade with precision and tested by real athletes to ensure the highest quality standards for strength and endurance training.</p>
+                </div>
+                <div class="why-item">
+                    <i class="fas fa-lock"></i>
+                    <h3>SIMPLE & SECURE PAYMENT</h3>
+                    <p>Choose from Cash on Delivery or secure Bank Transfer options. Easy payment confirmation and hassle-free experience for all our customers.</p>
+                </div>
+                <div class="why-item">
+                    <i class="fas fa-globe"></i>
+                    <h3>TRUSTED BY REAL ATHLETES</h3>
+                    <p>Join our growing community of dedicated calisthenics athletes who trust our products and training programs worldwide.</p>
+                </div>
+            </div>
+            <div class="why-bg">WHY US</div>
+        </div>
+    </section>
+
+    <!-- Our Crew Section -->
+    <section class="crew-section">
+        <div class="container">
+            <h2>OUR CREW</h2>
+            <div class="crew-grid">
+                <div class="crew-member">
+                    <div class="crew-image hasitha"></div>
+                    <h3>HASITHA GUNAWARDENA</h3>
+                    <div class="crew-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/hazidubz?igsh=Mmx4N2V4OTdtdnB5"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="crew-member">
+                    <div class="crew-image ramudu"></div>
+                    <h3>RAMUTHU RIVISAHAN</h3>
+                    <div class="crew-social">
+                        <a href="https://www.facebook.com/profile.php?id=61559288996230"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/ramuthurivisahan?igsh=MWxtNm56Nnl3N2gybg=="><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="crew-member">
+                    <div class="crew-image nadun"></div>
+                    <h3>YASINDU BHARATHA</h3>
+                    <div class="crew-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotional Banner Section -->
+    <section class="promo-banner">
+        <div class="promo-content">
+            <div class="promo-text">
+                <div class="promo-slogan">
+                    <h2>TRAIN HARD.</h2>
+                    <h2>MOVE FREE.</h2>
+                </div>
+                <div class="promo-description">
+                    <p>Elevate your fitness with calisthenics. Master bodyweight training for strength, skill, and freedom.</p>
+                </div>
+            </div>
+            <div class="promo-image">
+                <div class="image-placeholder" style="background-image: url('IMG/about.png');">
+                    <div class="placeholder-content">
+                        <i class="fas fa-users"></i>
+                        <p>Team Photo</p>
+                        <span>Upload team image via style attribute</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="IMG/logo1.png" alt="Powertain.Fitness" style="height: 30px;">
+                        <h3>Powertain.Fitness</h3>
+                    </div>
+                    <p>We're a community built on strength, movement, and discipline. From handcrafted equipment to performance apparel, everything we create is made to help you train harder, move smarter, and push beyond your limits.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>USEFUL LINKS</h4>
+                    <ul>
+                        <li><a href="index.html">→ Home</a></li>
+                        <li><a href="about.html">→ About Us</a></li>
+                        <li><a href="#contact">→ Contact</a></li>
+                        <li><a href="#equipment">→ Equipments</a></li>
+                        <li><a href="#products">→ Clothing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>CONTACT US</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>powertainfitnesslk@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>0713293562 | 0763517172</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Hanwella, Colombo, Sri Lanka</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Powertain.Fitness. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+     <script src="JS/AboutUs.js"></script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - Powertain.Fitness</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: Arial, sans-serif; background: #f5f5f5; }
+        .orders-container { max-width: 1200px; margin: 100px auto 50px; padding: 20px; }
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .refresh-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .refresh-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+        
+        .refresh-btn i {
+            transition: transform 0.5s ease;
+        }
+        
+        .refresh-btn.spinning i {
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .orders-header h1 { font-size: 2.5rem; font-weight: 800; }
+        .order-card { background: white; border-radius: 15px; padding: 25px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .order-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #f0f0f0; }
+        .order-number { font-size: 1.2rem; font-weight: 700; }
+        .order-date { color: #666; font-size: 0.9rem; }
+        .order-status { padding: 8px 20px; border-radius: 25px; font-weight: 600; font-size: 0.85rem; }
+        .status-pending { background: #fef3c7; color: #92400e; }
+        .status-confirmed { background: #dbeafe; color: #1e40af; }
+        .status-processing { background: #e0e7ff; color: #4338ca; }
+        .status-shipped { background: #ddd6fe; color: #5b21b6; }
+        .status-delivered { background: #d1fae5; color: #065f46; }
+        .order-items { margin-bottom: 20px; }
+        .order-item { display: flex; gap: 15px; padding: 15px; background: #f9f9f9; border-radius: 10px; margin-bottom: 10px; }
+        .item-image { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; }
+        .item-details { flex: 1; }
+        .item-name { font-weight: 600; margin-bottom: 5px; }
+        .item-meta { color: #666; font-size: 0.9rem; }
+        .order-total { text-align: right; font-size: 1.3rem; font-weight: 700; margin-top: 15px; }
+        .order-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 15px; }
+        .btn-confirm { padding: 10px 20px; background: #10b981; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; }
+        .btn-view { padding: 10px 20px; background: #000; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; }
+        .empty-orders { text-align: center; padding: 60px 20px; }
+        .empty-orders i { font-size: 5rem; color: #ddd; }
+    </style>
+</head>
+<body>
+     <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="IMG/logo1.png" alt="Calisthenics.Co" class="nav-logo-img">
+                <h2>Powertain.Fitness</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html">ABOUT US</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+                <li><a href="clothing.html">CLOTHING</a></li>
+                <li><a href="equipment.html">EQUIPMENT</a></li>
+            </ul>
+            
+            <div class="nav-icons">
+                <i class="fas fa-user" id="openAuth"></i>
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+    <div class="orders-container">
+        <div class="page-header">
+            <h1>My Orders</h1>
+            <button id="refreshBtn" class="refresh-btn" onclick="refreshOrders()" title="Refresh orders">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+        </div>
+        <div id="ordersContent"></div>
+        <div id="emptyOrders" class="empty-orders" style="display: none;">
+            <i class="fas fa-shopping-bag"></i>
+            <h2>No Orders Yet</h2>
+            <p>Start shopping to place your first order!</p>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                        <div class="nav-logo">
+                        <img src="IMG/logo1.png" alt="Calisthenics.Co" class="nav-logo-img">
+                        <h3>Powertain.Fitness</h3>
+                    </div>
+                    <p>We're a community built on strength, movement, and discipline. Our handcrafted equipment and performance apparel are designed to help you achieve your calisthenics goals.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>USEFUL LINKS</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#equipment">Equipment's</a></li>
+                        <li><a href="#products">Clothing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>CONTACT US</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>powertainfitnesslk@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>0713293562 | 0763517172 </span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Hanwella Colombo, Sri Lanka</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Powertain.Fitness All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="JS/cart.js"></script>
+    <script>
+        let autoRefreshInterval = null;
+        
+        // Start auto-refresh (every 30 seconds)
+        function startAutoRefresh() {
+            // Clear any existing interval
+            if (autoRefreshInterval) {
+                clearInterval(autoRefreshInterval);
+            }
+            // Refresh every 30 seconds
+            autoRefreshInterval = setInterval(() => {
+                console.log('Auto-refreshing orders...');
+                loadMyOrders(true); // true = silent refresh
+            }, 30000);
+        }
+        
+        // Manual refresh function
+        async function refreshOrders() {
+            const btn = document.getElementById('refreshBtn');
+            btn.classList.add('spinning');
+            btn.disabled = true;
+            
+            await loadMyOrders();
+            
+            setTimeout(() => {
+                btn.classList.remove('spinning');
+                btn.disabled = false;
+            }, 500);
+        }
+        
+        async function loadMyOrders(silent = false) {
+            try {
+                const authStr = localStorage.getItem('auth');
+                console.log('Auth from localStorage:', authStr);
+                
+                const auth = JSON.parse(authStr || '{}');
+                console.log('Parsed auth object:', auth);
+                
+                const userEmail = auth.email || auth.user_email || localStorage.getItem('user_email');
+                console.log('User email:', userEmail);
+                
+                if (!userEmail) {
+                    console.error('No email found in auth!');
+                    alert('Please login to view your orders. If you are already logged in, please logout and login again.');
+                    window.location.href = 'index.html';
+                    return;
+                }
+                
+                console.log('Loading orders for:', userEmail);
+
+                const response = await fetch(`backend/orders.php?action=user_orders&email=${userEmail}`);
+                const data = await response.json();
+
+                if (data.status === 'success' && data.orders.length > 0) {
+                    displayOrders(data.orders);
+                    // Show success notification on manual refresh
+                    if (!silent) {
+                        showRefreshNotification('Orders refreshed!', 'success');
+                    }
+                } else {
+                    document.getElementById('emptyOrders').style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error loading orders:', error);
+            }
+        }
+
+        function displayOrders(orders) {
+            const content = document.getElementById('ordersContent');
+            content.innerHTML = orders.map(order => `
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-number">Order #${order.order_number}</div>
+                            <div class="order-date">${new Date(order.created_at).toLocaleDateString()}</div>
+                        </div>
+                        <span class="order-status status-${order.status}">${order.status.toUpperCase()}</span>
+                    </div>
+                    <div class="order-items" id="items-${order.id}">Loading items...</div>
+                    <div class="order-total">Total: Rs.${parseFloat(order.total_amount).toFixed(2)}</div>
+                    ${order.status === 'delivered' ? `
+                        <div class="order-actions">
+                            <button class="btn-confirm" onclick="confirmReceived(${order.id})">CONFIRM RECEIVED</button>
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('');
+
+            // Load items for each order
+            orders.forEach(order => loadOrderItems(order.id));
+        }
+
+        async function loadOrderItems(orderId) {
+            try {
+                const response = await fetch(`backend/orders.php?action=get&id=${orderId}`);
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    const itemsDiv = document.getElementById(`items-${orderId}`);
+                    itemsDiv.innerHTML = data.order.items.map(item => {
+                        // Fix image path
+                        let imageSrc = item.product_image;
+                        if (!imageSrc || imageSrc === '' || imageSrc === 'null' || imageSrc === '0') {
+                            imageSrc = 'IMG/clo1.webp';
+                        } else if (!imageSrc.startsWith('IMG/') && !imageSrc.startsWith('uploads/') && !imageSrc.startsWith('http')) {
+                            imageSrc = 'IMG/' + imageSrc;
+                        }
+                        
+                        return `
+                            <div class="order-item">
+                                <img src="${imageSrc}" class="item-image" onerror="this.src='IMG/clo1.webp';">
+                                <div class="item-details">
+                                    <div class="item-name">${item.product_name}</div>
+                                    <div class="item-meta">
+                                        Qty: ${item.quantity}
+                                        ${item.size ? `| <strong>Size: ${item.size}</strong>` : ''}
+                                        ${item.color ? `| <strong>Color: ${item.color}</strong>` : ''}
+                                    </div>
+                                    <div class="item-meta">Rs.${parseFloat(item.product_price).toFixed(2)} each</div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                }
+            } catch (error) {
+                console.error('Error loading order items:', error);
+            }
+        }
+
+        async function confirmReceived(orderId) {
+            if (!confirm('Confirm that you have received this order?')) return;
+
+            try {
+                const formData = new FormData();
+                formData.append('order_id', orderId);
+                formData.append('status', 'delivered');
+                formData.append('notes', 'Customer confirmed receipt');
+
+                const response = await fetch('backend/orders.php?action=update_status', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                if (data.status === 'success') {
+                    alert('Thank you for confirming!');
+                    loadMyOrders();
+                }
+            } catch (error) {
+                console.error('Error confirming order:', error);
+            }
+        }
+
+        // Simple notification for refresh
+        function showRefreshNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#10b981' : '#3b82f6'};
+                color: white;
+                padding: 12px 24px;
+                border-radius: 8px;
+                font-weight: 600;
+                z-index: 999999;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 2000);
+        }
+        
+        // Load orders on page load and start auto-refresh
+        document.addEventListener('DOMContentLoaded', () => {
+            loadMyOrders();
+            startAutoRefresh();
+        });
+        
+        // Stop auto-refresh when user leaves page
+        window.addEventListener('beforeunload', () => {
+            if (autoRefreshInterval) {
+                clearInterval(autoRefreshInterval);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel - Powertain.Fitness</title>
+    <link rel="stylesheet" href="CSS/admin.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <i class="fas fa-dumbbell"></i>
+          <h2>Powertain<span>.Admin</span></h2>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-link active" data-section="dashboard">
+          <i class="fas fa-chart-line"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-link" data-section="clothing">
+          <i class="fas fa-tshirt"></i>
+          <span>Clothing Products</span>
+        </a>
+        <a href="#" class="nav-link" data-section="equipment">
+          <i class="fas fa-dumbbell"></i>
+          <span>Equipment Products</span>
+        </a>
+        <a href="#" class="nav-link" data-section="training">
+          <i class="fas fa-running"></i>
+          <span>Training Sessions</span>
+        </a>
+        <a href="#" class="nav-link" data-section="users">
+          <i class="fas fa-users"></i>
+          <span>User Management</span>
+        </a>
+        <a href="#" class="nav-link" data-section="orders">
+          <i class="fas fa-shopping-bag"></i>
+          <span>Orders</span>
+          <span class="badge">5</span>
+        </a>
+        <a href="#" class="nav-link" data-section="settings">
+          <i class="fas fa-cog"></i>
+          <span>Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="admin-profile">
+          <div class="admin-avatar">
+            <i class="fas fa-user-shield"></i>
+          </div>
+          <div class="admin-info">
+            <h4>Admin</h4>
+            <p>powertainadmin@gmail.com</p>
+          </div>
+        </div>
+        <button class="logout-btn" id="logoutBtn">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-left">
+          <button class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1 id="pageTitle">Dashboard</h1>
+        </div>
+        <div class="header-right">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search..." />
+          </div>
+          <button class="notification-btn">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Dashboard Section -->
+      <section id="dashboard" class="content-section active">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div
+              class="stat-icon"
+              style="
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              "
+            >
+              <i class="fas fa-shopping-bag"></i>
+            </div>
+            <div class="stat-info">
+              <h3 id="totalOrders">0</h3>
+              <p>Total Orders</p>
+            </div>
+            <div class="stat-trend up"><i class="fas fa-arrow-up"></i> 12%</div>
+          </div>
+
+          <div class="stat-card">
+            <div
+              class="stat-icon"
+              style="
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+              "
+            >
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-info">
+              <h3 id="totalUsers">0</h3>
+              <p>Total Users</p>
+            </div>
+            <div class="stat-trend up"><i class="fas fa-arrow-up"></i> 8%</div>
+          </div>
+
+          <div class="stat-card">
+            <div
+              class="stat-icon"
+              style="
+                background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+              "
+            >
+              <i class="fas fa-box"></i>
+            </div>
+            <div class="stat-info">
+              <h3 id="totalProducts">0</h3>
+              <p>Total Products</p>
+            </div>
+            <div class="stat-trend up"><i class="fas fa-arrow-up"></i> 5%</div>
+          </div>
+
+          <div class="stat-card">
+            <div
+              class="stat-icon"
+              style="
+                background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+              "
+            >
+              <i class="fas fa-dollar-sign"></i>
+            </div>
+            <div class="stat-info">
+              <h3 id="totalRevenue">$0</h3>
+              <p>Total Revenue</p>
+            </div>
+            <div class="stat-trend up"><i class="fas fa-arrow-up"></i> 15%</div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="dashboard-card">
+            <div class="card-header">
+              <h3>Recent Orders</h3>
+              <a href="#" class="view-all" data-section="orders">View All</a>
+            </div>
+            <div class="recent-orders" id="recentOrders">
+              <p class="empty-state">No recent orders</p>
+            </div>
+          </div>
+
+          <div class="dashboard-card">
+            <div class="card-header">
+              <h3>Top Products</h3>
+            </div>
+            <div class="top-products" id="topProducts">
+              <p class="empty-state">No products data</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Clothing Products Section -->
+      <section id="clothing" class="content-section">
+        <div class="section-header">
+          <h2>Clothing Products</h2>
+          <button class="btn-primary" id="addClothingBtn">
+            <i class="fas fa-plus"></i> Add New Product
+          </button>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="clothingTableBody">
+              <tr>
+                <td colspan="8" class="empty-state">
+                  No clothing products found
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Equipment Products Section -->
+      <section id="equipment" class="content-section">
+        <div class="section-header">
+          <h2>Equipment Products</h2>
+          <button class="btn-primary" id="addEquipmentBtn">
+            <i class="fas fa-plus"></i> Add New Equipment
+          </button>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Material</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="equipmentTableBody">
+              <tr>
+                <td colspan="8" class="empty-state">
+                  No equipment products found
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Training Sessions Section -->
+      <section id="training" class="content-section">
+        <div class="section-header">
+          <h2>Training Sessions</h2>
+          <button class="btn-primary" id="addTrainingBtn">
+            <i class="fas fa-plus"></i> Add New Session
+          </button>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Session Name</th>
+                <th>Trainer</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Duration</th>
+                <th>Capacity</th>
+                <th>Enrolled</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="trainingTableBody">
+              <tr>
+                <td colspan="9" class="empty-state">
+                  No training sessions found
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Users Section -->
+      <section id="users" class="content-section">
+        <div class="section-header">
+          <h2>User Management</h2>
+          <div class="section-actions">
+            <div class="filter-group">
+              <select id="userFilter" class="filter-select">
+                <option value="all">All Users</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Joined Date</th>
+                <th>Orders</th>
+                <th>Total Spent</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="usersTableBody">
+              <tr>
+                <td colspan="8" class="empty-state">Loading users...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Orders Section -->
+      <section id="orders" class="content-section">
+        <div class="section-header">
+          <h2>Order Management</h2>
+          <div class="section-actions">
+            <div class="filter-group">
+              <select id="orderStatusFilter" class="filter-select">
+                <option value="all">All Orders</option>
+                <option value="pending">Pending</option>
+                <option value="processing">Processing</option>
+                <option value="shipped">Shipped</option>
+                <option value="delivered">Delivered</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+            <button class="btn-secondary" id="exportOrdersBtn">
+              <i class="fas fa-download"></i> Export
+            </button>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Products</th>
+                <th>Total</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTableBody">
+              <tr>
+                <td colspan="7" class="empty-state">Loading orders...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Settings Section -->
+      <section id="settings" class="content-section">
+        <div class="section-header">
+          <h2>Admin Settings</h2>
+        </div>
+
+        <div class="settings-container">
+          <div class="settings-card">
+            <div class="settings-card-header">
+              <i class="fas fa-lock"></i>
+              <h3>Change Password</h3>
+              <p>Update your admin password to keep your account secure</p>
+            </div>
+            
+            <form id="changePasswordForm" class="settings-form">
+              <div class="form-group">
+                <label for="currentPassword">
+                  <i class="fas fa-key"></i> Current Password
+                </label>
+                <input
+                  type="password"
+                  id="currentPassword"
+                  name="current_password"
+                  placeholder="Enter your current password"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="newPassword">
+                  <i class="fas fa-lock"></i> New Password
+                </label>
+                <input
+                  type="password"
+                  id="newPassword"
+                  name="new_password"
+                  placeholder="Enter new password (min 8 characters)"
+                  minlength="8"
+                  required
+                />
+                <small class="password-hint">
+                  <i class="fas fa-info-circle"></i>
+                  Password must be at least 8 characters long
+                </small>
+              </div>
+
+              <div class="form-group">
+                <label for="confirmPassword">
+                  <i class="fas fa-lock-open"></i> Confirm New Password
+                </label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirm_password"
+                  placeholder="Confirm your new password"
+                  required
+                />
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn-primary">
+                  <i class="fas fa-save"></i>
+                  Change Password
+                </button>
+                <button type="button" class="btn-secondary" id="cancelPasswordChange">
+                  <i class="fas fa-times"></i>
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="settings-card">
+            <div class="settings-card-header">
+              <i class="fas fa-info-circle"></i>
+              <h3>Admin Information</h3>
+            </div>
+            <div class="admin-info-display">
+              <div class="info-item">
+                <label><i class="fas fa-envelope"></i> Email:</label>
+                <span>powertainadmin@gmail.com</span>
+              </div>
+              <div class="info-item">
+                <label><i class="fas fa-user"></i> Role:</label>
+                <span class="role-badge">Administrator</span>
+              </div>
+              <div class="info-item">
+                <label><i class="fas fa-shield-alt"></i> Security:</label>
+                <span class="security-status">
+                  <i class="fas fa-check-circle"></i> Password Protected
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="modalTitle">Add New Product</h3>
+          <button class="modal-close">&times;</button>
+        </div>
+        <form id="productForm" class="modal-form">
+          <input type="hidden" id="productId" />
+          <input type="hidden" id="productType" />
+
+          <div class="form-group">
+            <label>Product Name</label>
+            <input type="text" id="productName" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Category</label>
+              <select id="productCategory" required>
+                <option value="">Select Category</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Price (Rs.)</label>
+              <input type="number" id="productPrice" step="0.01" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Stock</label>
+              <input type="number" id="productStock" required />
+            </div>
+            <div class="form-group" id="materialGroup" style="display: none">
+              <label>Material</label>
+              <input type="text" id="productMaterial" />
+            </div>
+            <div class="form-group" id="sizeGroup" style="display: none">
+              <label>Sizes Available</label>
+              <input type="text" id="productSizes" placeholder="S, M, L, XL" />
+            </div>
+          </div>
+
+          <!-- Colors for Clothing -->
+          <div class="form-group" id="colorGroup" style="display: none">
+            <label>Available Colors</label>
+            <input
+              type="text"
+              id="productColors"
+              placeholder="Black, White, Red, Blue"
+            />
+            <small>Separate colors with commas</small>
+          </div>
+
+          <!-- Multiple Product Images -->
+          <div class="form-group">
+            <label>Product Images (Upload up to 6 images)</label>
+            <div class="image-upload-container">
+              <div class="image-upload-item">
+                <label>Main Image (Required)</label>
+                <input
+                  type="file"
+                  id="productImage1"
+                  accept="image/*"
+                  class="image-input"
+                />
+                <div class="image-preview" id="preview1" style="display: none">
+                  <img
+                    style="
+                      max-width: 100px;
+                      max-height: 100px;
+                      border-radius: 8px;
+                    "
+                  />
+                  <button
+                    type="button"
+                    class="remove-image"
+                    onclick="removeImage(1)"
+                  >
+                    ×
+                  </button>
+                </div>
+              </div>
+
+              <div class="image-upload-item">
+                <label>Image 2</label>
+                <input
+                  type="file"
+                  id="productImage2"
+                  accept="image/*"
+                  class="image-input"
+                />
+                <div class="image-preview" id="preview2" style="display: none">
+                  <img
+                    style="
+                      max-width: 100px;
+                      max-height: 100px;
+                      border-radius: 8px;
+                    "
+                  />
+                  <button
+                    type="button"
+                    class="remove-image"
+                    onclick="removeImage(2)"
+                  >
+                    ×
+                  </button>
+                </div>
+              </div>
+
+              <div class="image-upload-item">
+                <label>Image 3</label>
+                <input
+                  type="file"
+                  id="productImage3"
+                  accept="image/*"
+                  class="image-input"
+                />
+                <div class="image-preview" id="preview3" style="display: none">
+                  <img
+                    style="
+                      max-width: 100px;
+                      max-height: 100px;
+                      border-radius: 8px;
+                    "
+                  />
+                  <button
+                    type="button"
+                    class="remove-image"
+                    onclick="removeImage(3)"
+                  >
+                    ×
+                  </button>
+                </div>
+              </div>
+
+              <div class="image-upload-item">
+                <label>Image 4</label>
+                <input
+                  type="file"
+                  id="productImage4"
+                  accept="image/*"
+                  class="image-input"
+                />
+                <div class="image-preview" id="preview4" style="display: none">
+                  <img
+                    style="
+                      max-width: 100px;
+                      max-height: 100px;
+                      border-radius: 8px;
+                    "
+                  />
+                  <button
+                    type="button"
+                    class="remove-image"
+                    onclick="removeImage(4)"
+                  >
+                    ×
+                  </button>
+                </div>
+              </div>
+
+              <div class="image-upload-item">
+                <label>Image 5</label>
+                <input
+                  type="file"
+                  id="productImage5"
+                  accept="image/*"
+                  class="image-input"
+                />
+                <div class="image-preview" id="preview5" style="display: none">
+                  <img
+                    style="
+                      max-width: 100px;
+                      max-height: 100px;
+                      border-radius: 8px;
+                    "
+                  />
+                  <button
+                    type="button"
+                    class="remove-image"
+                    onclick="removeImage(5)"
+                  >
+                    ×
+                  </button>
+                </div>
+              </div>
+
+              <div class="image-upload-item">
+                <label>Image 6</label>
+                <input
+                  type="file"
+                  id="productImage6"
+                  accept="image/*"
+                  class="image-input"
+                />
+                <div class="image-preview" id="preview6" style="display: none">
+                  <img
+                    style="
+                      max-width: 100px;
+                      max-height: 100px;
+                      border-radius: 8px;
+                    "
+                  />
+                  <button
+                    type="button"
+                    class="remove-image"
+                    onclick="removeImage(6)"
+                  >
+                    ×
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Size-based Stock for Clothing -->
+          <div class="form-group" id="sizeStockGroup" style="display: none">
+            <label>Stock by Size</label>
+            <div class="size-stock-container">
+              <div class="size-stock-item">
+                <label>S:</label>
+                <input type="number" id="stockS" min="0" placeholder="0" />
+              </div>
+              <div class="size-stock-item">
+                <label>M:</label>
+                <input type="number" id="stockM" min="0" placeholder="0" />
+              </div>
+              <div class="size-stock-item">
+                <label>L:</label>
+                <input type="number" id="stockL" min="0" placeholder="0" />
+              </div>
+              <div class="size-stock-item">
+                <label>XL:</label>
+                <input type="number" id="stockXL" min="0" placeholder="0" />
+              </div>
+              <div class="size-stock-item">
+                <label>XXL:</label>
+                <input type="number" id="stockXXL" min="0" placeholder="0" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="productDescription" rows="3"></textarea>
+          </div>
+
+          <div class="form-group" id="statusGroup">
+            <label>Status</label>
+            <select id="productStatus">
+              <option value="normal">Normal</option>
+              <option value="new">New</option>
+              <option value="sale">Sale</option>
+            </select>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" class="btn-secondary modal-close">
+              Cancel
+            </button>
+            <button type="submit" class="btn-primary">Save Product</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Training Session Modal -->
+    <div id="trainingModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="trainingModalTitle">Add Training Session</h3>
+          <button class="modal-close">&times;</button>
+        </div>
+        <form id="trainingForm" class="modal-form">
+          <input type="hidden" id="trainingId" />
+
+          <div class="form-group">
+            <label>Session Name</label>
+            <input type="text" id="trainingName" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Trainer Name</label>
+              <input type="text" id="trainingTrainer" required />
+            </div>
+            <div class="form-group">
+              <label>Duration (minutes)</label>
+              <input type="number" id="trainingDuration" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Date</label>
+              <input type="date" id="trainingDate" required />
+            </div>
+            <div class="form-group">
+              <label>Time</label>
+              <input type="time" id="trainingTime" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Capacity</label>
+              <input type="number" id="trainingCapacity" required />
+            </div>
+            <div class="form-group">
+              <label>Price (Rs.)</label>
+              <input type="number" id="trainingPrice" step="0.01" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="trainingDescription" rows="3"></textarea>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" class="btn-secondary modal-close">
+              Cancel
+            </button>
+            <button type="submit" class="btn-primary">Save Session</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Order Details Modal -->
+    <div id="orderModal" class="modal">
+      <div class="modal-content large">
+        <div class="modal-header">
+          <h3>Order Details</h3>
+          <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body" id="orderDetails">
+          <!-- Order details will be populated here -->
+        </div>
+      </div>
+    </div>
+
+    <script src="JS/admin.js"></script>
+  </body>
+</html>
