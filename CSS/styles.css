@@ -408,6 +408,11 @@ body {
 
 .vision-item {
     text-align: center;
+    background: #fff;
+    padding: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
 .vision-image {
@@ -415,9 +420,9 @@ body {
     height: 250px;
     margin: 0 auto 1rem;
     border-radius: 10px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
     overflow: hidden;
     position: relative;
 }
@@ -440,6 +445,9 @@ body {
     color: #000;
     text-transform: uppercase;
     letter-spacing: 1px;
+    padding: 1.5rem 1rem;
+    margin: 0;
+    background: #fff;
 }
 
 .vision-bg {
@@ -1123,6 +1131,7 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    /* Navigation */
     .nav-menu {
         position: fixed;
         left: -100%;
@@ -1134,10 +1143,16 @@ body {
         transition: 0.3s;
         padding: 2rem 0;
         backdrop-filter: blur(10px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        z-index: 999;
     }
 
     .nav-menu.active {
         left: 0;
+    }
+
+    .nav-menu li {
+        margin: 1rem 0;
     }
 
     .nav-toggle {
@@ -1156,22 +1171,67 @@ body {
         transform: rotate(45deg) translate(-5px, -6px);
     }
 
+    .nav-logo h2 {
+        font-size: 1.2rem;
+    }
+
+    .nav-logo-img {
+        height: 35px;
+        width: auto;
+    }
+
+    /* Hero Section */
     .hero {
         flex-direction: column;
         text-align: center;
-        padding: 120px 20px 50px;
+        padding: 100px 20px 50px;
+        min-height: auto;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        margin-bottom: 2rem;
+        padding: 0 10px;
     }
 
     .hero h1 {
         font-size: 2.5rem;
+        letter-spacing: -1px;
     }
 
-    .hero-content {
-        margin-bottom: 2rem;
+    .hero p {
+        font-size: 1rem;
+        max-width: 100%;
     }
 
     .hero-buttons {
         justify-content: center;
+        gap: 0.8rem;
+    }
+
+    .hero-buttons .btn {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+    }
+
+    .hero-image {
+        width: 100%;
+        height: 400px;
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .hero-photo {
+        position: relative;
+        width: 90%;
+        max-width: 350px;
+        height: 400px;
+        left: auto;
+        top: auto;
+        transform: none;
+        margin: 0 auto;
     }
 
     .hero-social {
@@ -1180,48 +1240,247 @@ body {
         flex-direction: row;
         justify-content: center;
         margin-top: 2rem;
+        gap: 1rem;
     }
 
-    .vision-grid,
-    .products-grid,
-    .why-grid,
+    .hero-social a {
+        width: 45px;
+        height: 45px;
+    }
+
+    /* Vision Section */
+    .vision {
+        padding: 60px 0;
+    }
+
+    .vision-content {
+        margin-left: 0;
+        padding: 0 20px;
+    }
+
+    .vision h2,
+    .vision h3 {
+        font-size: 2rem;
+    }
+
+    .vision-bg {
+        font-size: 6rem;
+        opacity: 0.03;
+    }
+
+    .vision-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .vision-item {
+        padding: 2rem 1.5rem;
+    }
+
+    .vision-image {
+        height: 250px;
+        background-size: cover !important;
+        background-position: center center !important;
+    }
+
+    /* Products Section */
+    .products {
+        padding: 60px 0;
+    }
+
+    .products h2,
+    .products h3 {
+        font-size: 2rem;
+    }
+
+    .product-tabs {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .tab-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        flex: 0 1 auto;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        padding: 0 10px;
+    }
+
+    .product-card {
+        margin: 0;
+    }
+
+    .product-image {
+        height: 250px;
+    }
+
+    /* Why Choose Section */
+    .why-choose {
+        padding: 60px 0;
+    }
+
+    .why-choose h2 {
+        font-size: 2rem;
+    }
+
+    .why-bg {
+        font-size: 6rem;
+        opacity: 0.03;
+    }
+
+    .why-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    /* Crew Section */
+    .crew {
+        padding: 60px 0;
+    }
+
+    .crew h2 {
+        font-size: 2rem;
+    }
+
     .crew-grid {
         grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .crew-card {
+        max-width: 350px;
+        margin: 0 auto;
+    }
+
+    /* Testimonials Section */
+    .testimonials {
+        padding: 60px 0;
+    }
+
+    .testimonials h3 {
+        font-size: 2rem;
     }
 
     .testimonials-grid {
         grid-template-columns: 1fr;
     }
 
-    .contact-content {
-        grid-template-columns: 1fr;
+    .testimonial-card {
+        padding: 2rem 1.5rem;
     }
 
+    /* Contact Section */
+    .contact {
+        padding: 60px 0;
+    }
+
+    .contact h2,
+    .contact h3 {
+        font-size: 2rem;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+
+    /* Footer */
     .footer-content {
         grid-template-columns: 1fr;
         text-align: center;
+        gap: 2rem;
     }
 
-    .product-tabs {
-        flex-direction: column;
-        align-items: center;
+    .footer-section h3 {
+        font-size: 1.2rem;
+    }
+
+    /* Floating Buttons */
+    .scroll-to-top,
+    .whatsapp-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
     }
 }
 
 @media (max-width: 480px) {
-    .hero h1 {
-        font-size: 2rem;
-    }
-
-    .hero p {
+    /* Extra small mobile adjustments */
+    .nav-logo h2 {
         font-size: 1rem;
     }
 
-    .btn {
-        padding: 12px 24px;
-        font-size: 0.8rem;
+    .nav-logo-img {
+        height: 30px;
     }
 
+    .hero {
+        padding: 80px 15px 40px;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+        line-height: 1.2;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+        margin: 1.5rem 0;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.85rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.8rem;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .hero-image {
+        height: 350px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .hero-photo {
+        width: 95%;
+        max-width: 320px;
+        height: 350px;
+        left: auto;
+        top: auto;
+        transform: none;
+        margin: 0 auto;
+    }
+
+    .hero-social a {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    /* Section headings */
     .vision h2,
     .vision h3,
     .products h2,
@@ -1231,12 +1490,90 @@ body {
     .testimonials h3,
     .contact h2,
     .contact h3 {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
     .vision-bg,
     .why-bg {
-        font-size: 8rem;
+        font-size: 5rem;
+    }
+
+    /* Product tabs */
+    .product-tabs {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .tab-btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .product-card {
+        max-width: 100%;
+    }
+
+    /* Vision items */
+    .vision-item {
+        padding: 1.5rem 1rem;
+    }
+
+    .vision-image {
+        height: 220px;
+    }
+
+    .vision-item h4 {
+        font-size: 1.3rem;
+    }
+
+    /* Why choose items */
+    .why-item h4 {
+        font-size: 1.2rem;
+    }
+
+    /* Testimonials */
+    .testimonial-card {
+        padding: 1.5rem 1rem;
+    }
+
+    .author-info h4 {
+        font-size: 1rem;
+    }
+
+    /* Contact form */
+    .contact-form {
+        padding: 1.5rem;
+    }
+
+    .contact-info {
+        padding: 1.5rem;
+    }
+
+    /* Footer */
+    .footer-content {
+        padding: 0 15px;
+    }
+
+    /* Floating buttons */
+    .scroll-to-top {
+        bottom: 20px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .whatsapp-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
     }
 }
 
