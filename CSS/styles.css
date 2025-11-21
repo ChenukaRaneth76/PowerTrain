@@ -755,15 +755,17 @@ body {
 
 .crew-image.hasitha {
   background: linear-gradient(135deg, #d1d5db, #9ca3af);
-  background-image: url("../IMG/m1.webp");
+  background-image: url("../IMG/hasitha.jpeg");
 }
 
 .crew-image.ramudu {
   background: linear-gradient(135deg, #9ca3af, #6b7280);
+  background-image: url("../IMG/ramuthu.jpeg");
 }
 
-.crew-image.nadun {
+.crew-image.yasindu {
   background: linear-gradient(135deg, #6b7280, #4b5563);
+  background-image: url("../IMG/yasindu.jpeg");
 }
 
 .crew-member h3 {
@@ -1015,33 +1017,22 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.contact-image {
-  width: 100%;
-  max-width: 550px; /* Increased visible size */
-  height: 550px; /* Increased height */
-  border-radius: 20px;
   overflow: hidden;
-  flex-shrink: 0;
-  position: relative;
 }
 
 .contact-figure {
-  width: 100%;
-  height: 100%;
-  background: none !important;
-  background-image: url("../IMG/contact.png") !important;
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
+  width: 600px;
+  height: 600px;
+  border-radius: 20px;
   transition: transform 0.4s ease;
+  object-fit: cover;
+  display: block;
 }
 
-/* Hover zoom effect */
 .contact-figure:hover {
   transform: scale(1.05);
 }
+
 /* Footer */
 .footer {
   background: #f5f5f5;

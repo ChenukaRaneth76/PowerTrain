@@ -626,10 +626,12 @@ body {
 
 .crew-image.ramudu {
     background: linear-gradient(135deg, #9ca3af, #6b7280);
+    background-image: url('../IMG/ramuthu.jpeg');
 }
 
-.crew-image.nadun {
+.crew-image.yasindu {
     background: linear-gradient(135deg, #6b7280, #4b5563);
+    background-image: url('../IMG/yasindu.jpeg');
 }
 
 .crew-member h3 {
