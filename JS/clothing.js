@@ -1,9 +1,23 @@
+// Mobile Filter Toggle
+const mobileFilterToggle = document.getElementById('mobileFilterToggle');
+const filterPanelMobile = document.getElementById('filterPanelMobile');
+
+if (mobileFilterToggle && filterPanelMobile) {
+    mobileFilterToggle.addEventListener('click', function() {
+        this.classList.toggle('active');
+        filterPanelMobile.classList.toggle('active');
+    });
+}
+
 // Global variables
 let allProducts = [];
 let filteredProducts = [];
 const categoryFilter = document.getElementById('categoryFilter');
 const priceFilter = document.getElementById('priceFilter');
 const sizeFilter = document.getElementById('sizeFilter');
+const categoryFilterMobile = document.getElementById('categoryFilterMobile');
+const priceFilterMobile = document.getElementById('priceFilterMobile');
+const sizeFilterMobile = document.getElementById('sizeFilterMobile');
 const filterTags = document.querySelectorAll('.filter-tag');
 const sortBy = document.getElementById('sortBy');
 const productsGrid = document.getElementById('productsGrid');
@@ -15,6 +29,29 @@ let currentFilters = {
     size: 'all',
     status: 'all'
 };
+
+// Sync mobile and desktop filters
+function syncFilters(source, target) {
+    if (source && target) {
+        target.value = source.value;
+    }
+}
+
+// Add sync listeners
+if (categoryFilter && categoryFilterMobile) {
+    categoryFilter.addEventListener('change', () => syncFilters(categoryFilter, categoryFilterMobile));
+    categoryFilterMobile.addEventListener('change', () => syncFilters(categoryFilterMobile, categoryFilter));
+}
+
+if (priceFilter && priceFilterMobile) {
+    priceFilter.addEventListener('change', () => syncFilters(priceFilter, priceFilterMobile));
+    priceFilterMobile.addEventListener('change', () => syncFilters(priceFilterMobile, priceFilter));
+}
+
+if (sizeFilter && sizeFilterMobile) {
+    sizeFilter.addEventListener('change', () => syncFilters(sizeFilter, sizeFilterMobile));
+    sizeFilterMobile.addEventListener('change', () => syncFilters(sizeFilterMobile, sizeFilter));
+}
 
 // Load products from database
 async function loadProducts() {

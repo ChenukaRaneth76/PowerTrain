@@ -348,19 +348,25 @@
     // 7. HERO PARALLAX EFFECT (OPTIMIZED)
     // ============================
     function initHeroParallax() {
+        // Disable parallax on mobile to prevent transform conflicts
+        if (window.innerWidth <= 768) return;
+        
         const heroCircle = document.querySelector('.hero-circle');
         const heroPhoto = document.querySelector('.hero-photo');
         
         if (!heroCircle && !heroPhoto) return;
         
         const handleScroll = throttle(() => {
-            const scrolled = window.pageYOffset;
-            
-            if (scrolled < window.innerHeight) {
-                requestAnimationFrame(() => {
-                    if (heroCircle) heroCircle.style.transform = `scale(${1 + scrolled * 0.0005})`;
-                    if (heroPhoto) heroPhoto.style.transform = `translate(-50%, -50%) translateY(${scrolled * 0.3}px)`;
-                });
+            // Only apply parallax on desktop
+            if (window.innerWidth > 768) {
+                const scrolled = window.pageYOffset;
+                
+                if (scrolled < window.innerHeight) {
+                    requestAnimationFrame(() => {
+                        if (heroCircle) heroCircle.style.transform = `scale(${1 + scrolled * 0.0005})`;
+                        if (heroPhoto) heroPhoto.style.transform = `translate(-50%, -50%) translateY(${scrolled * 0.3}px)`;
+                    });
+                }
             }
         }, 16); // ~60fps
         
@@ -587,7 +593,375 @@
     }
 
     // ============================
-    // INITIALIZE ALL FUNCTIONS
+    // 17. IMAGE LAZY LOADING
+    // ============================
+    function initImageLazyLoading() {
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                        }
+                        img.classList.add('loaded');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => imageObserver.observe(img));
+        } else {
+            // Fallback for browsers that don't support IntersectionObserver
+            images.forEach(img => {
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                }
+                img.classList.add('loaded');
+            });
+        }
+    }
+
+    // ============================
+    // 13. VISION SECTION MOBILE CAROUSEL
+    // ============================
+    function initVisionMobileCarousel() {
+        // Only initialize on mobile devices
+        if (window.innerWidth > 768) return;
+        
+        const visionGrid = document.querySelector('.vision-grid');
+        const visionItems = document.querySelectorAll('.vision-item');
+        
+        if (!visionGrid || visionItems.length === 0) return;
+        
+        // Create carousel wrapper
+        const carouselWrapper = document.createElement('div');
+        carouselWrapper.className = 'vision-carousel-wrapper';
+        
+        // Move all vision items into the wrapper
+        visionItems.forEach(item => {
+            carouselWrapper.appendChild(item.cloneNode(true));
+        });
+        
+        // Clear original grid and add wrapper
+        visionGrid.innerHTML = '';
+        visionGrid.appendChild(carouselWrapper);
+        
+        // Create dots container
+        const dotsContainer = document.createElement('div');
+        dotsContainer.className = 'vision-carousel-dots';
+        
+        // Create dots
+        visionItems.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.className = 'carousel-dot';
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+        
+        // Add dots after the vision grid
+        visionGrid.parentNode.insertBefore(dotsContainer, visionGrid.nextSibling);
+        
+        let currentSlide = 0;
+        let startX = 0;
+        let isDragging = false;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        
+        // Update slide position
+        function updateSlidePosition() {
+            carouselWrapper.style.transform = `translateX(${currentTranslate}px)`;
+        }
+        
+        // Go to specific slide
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            currentTranslate = -slideIndex * visionGrid.offsetWidth;
+            prevTranslate = currentTranslate;
+            updateSlidePosition();
+            
+            // Update dots
+            document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === slideIndex);
+            });
+        }
+        
+        // Touch events
+        carouselWrapper.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            carouselWrapper.style.transition = 'none';
+        });
+        
+        carouselWrapper.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const currentX = e.touches[0].clientX;
+            const diff = currentX - startX;
+            currentTranslate = prevTranslate + diff;
+            updateSlidePosition();
+        });
+        
+        carouselWrapper.addEventListener('touchend', (e) => {
+            isDragging = false;
+            const movedBy = currentTranslate - prevTranslate;
+            carouselWrapper.style.transition = 'transform 0.4s ease';
+            
+            // Determine if we should change slides
+            if (movedBy < -50 && currentSlide < visionItems.length - 1) {
+                goToSlide(currentSlide + 1);
+            } else if (movedBy > 50 && currentSlide > 0) {
+                goToSlide(currentSlide - 1);
+            } else {
+                goToSlide(currentSlide);
+            }
+        });
+        
+        // Mouse events for desktop testing
+        carouselWrapper.addEventListener('mousedown', (e) => {
+            startX = e.clientX;
+            isDragging = true;
+            carouselWrapper.style.transition = 'none';
+            carouselWrapper.style.cursor = 'grabbing';
+            e.preventDefault();
+        });
+        
+        carouselWrapper.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const currentX = e.clientX;
+            const diff = currentX - startX;
+            currentTranslate = prevTranslate + diff;
+            updateSlidePosition();
+        });
+        
+        carouselWrapper.addEventListener('mouseup', () => {
+            isDragging = false;
+            const movedBy = currentTranslate - prevTranslate;
+            carouselWrapper.style.transition = 'transform 0.4s ease';
+            carouselWrapper.style.cursor = 'grab';
+            
+            if (movedBy < -50 && currentSlide < visionItems.length - 1) {
+                goToSlide(currentSlide + 1);
+            } else if (movedBy > 50 && currentSlide > 0) {
+                goToSlide(currentSlide - 1);
+            } else {
+                goToSlide(currentSlide);
+            }
+        });
+        
+        carouselWrapper.addEventListener('mouseleave', () => {
+            if (isDragging) {
+                isDragging = false;
+                carouselWrapper.style.transition = 'transform 0.4s ease';
+                goToSlide(currentSlide);
+            }
+        });
+        
+        // Auto-play carousel
+        setInterval(() => {
+            if (!isDragging) {
+                currentSlide = (currentSlide + 1) % visionItems.length;
+                goToSlide(currentSlide);
+            }
+        }, 5000);
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                // Reset to desktop layout
+                location.reload();
+            } else {
+                goToSlide(currentSlide);
+            }
+        });
+    }
+
+    // ============================
+    // 14. TESTIMONIALS MOBILE CAROUSEL
+    // ============================
+    function initTestimonialsMobileCarousel() {
+        // Only initialize on mobile
+        if (window.innerWidth > 768) return;
+        
+        const testimonialsSlider = document.querySelector('.testimonials-slider');
+        const slides = document.querySelectorAll('.testimonials-slide');
+        const dots = document.querySelectorAll('.testimonial-dots .dot');
+        
+        if (!testimonialsSlider || slides.length === 0) return;
+        
+        let currentSlide = 0;
+        let startX = 0;
+        let isDragging = false;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        
+        // Setup carousel wrapper
+        testimonialsSlider.style.display = 'flex';
+        testimonialsSlider.style.transition = 'transform 0.4s ease';
+        
+        slides.forEach(slide => {
+            slide.style.minWidth = '100%';
+            slide.style.opacity = '1';
+            slide.style.transform = 'none';
+            slide.style.position = 'relative';
+        });
+        
+        function goToSlide(index) {
+            currentSlide = index;
+            currentTranslate = -index * testimonialsSlider.offsetWidth;
+            prevTranslate = currentTranslate;
+            testimonialsSlider.style.transform = `translateX(${currentTranslate}px)`;
+            
+            // Update dots
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+        
+        // Touch events
+        testimonialsSlider.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            testimonialsSlider.style.transition = 'none';
+        });
+        
+        testimonialsSlider.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const currentX = e.touches[0].clientX;
+            const diff = currentX - startX;
+            currentTranslate = prevTranslate + diff;
+            testimonialsSlider.style.transform = `translateX(${currentTranslate}px)`;
+        });
+        
+        testimonialsSlider.addEventListener('touchend', () => {
+            isDragging = false;
+            const movedBy = currentTranslate - prevTranslate;
+            testimonialsSlider.style.transition = 'transform 0.4s ease';
+            
+            if (movedBy < -50 && currentSlide < slides.length - 1) {
+                goToSlide(currentSlide + 1);
+            } else if (movedBy > 50 && currentSlide > 0) {
+                goToSlide(currentSlide - 1);
+            } else {
+                goToSlide(currentSlide);
+            }
+        });
+        
+        // Dot clicks
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => goToSlide(index));
+        });
+        
+        // Initialize first slide
+        goToSlide(0);
+    }
+
+    // ============================
+    // 15. CREW SECTION MOBILE CAROUSEL
+    // ============================
+    function initCrewMobileCarousel() {
+        // Only initialize on mobile
+        if (window.innerWidth > 768) return;
+        
+        const crewGrid = document.querySelector('.crew-grid');
+        const crewMembers = document.querySelectorAll('.crew-member');
+        
+        if (!crewGrid || crewMembers.length === 0) return;
+        
+        // Create carousel wrapper
+        const carouselWrapper = document.createElement('div');
+        carouselWrapper.className = 'crew-carousel-wrapper';
+        
+        // Clone and move crew members
+        crewMembers.forEach(member => {
+            carouselWrapper.appendChild(member.cloneNode(true));
+        });
+        
+        // Clear and restructure
+        crewGrid.innerHTML = '';
+        crewGrid.appendChild(carouselWrapper);
+        
+        // Create dots
+        const dotsContainer = document.createElement('div');
+        dotsContainer.className = 'crew-carousel-dots';
+        
+        crewMembers.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.className = 'crew-dot';
+            if (index === 0) dot.classList.add('active');
+            dotsContainer.appendChild(dot);
+        });
+        
+        crewGrid.parentNode.insertBefore(dotsContainer, crewGrid.nextSibling);
+        
+        let currentSlide = 0;
+        let startX = 0;
+        let isDragging = false;
+        
+        function goToSlide(index) {
+            currentSlide = index;
+            carouselWrapper.style.transform = `translateX(-${index * 100}%)`;
+            
+            // Update dots
+            document.querySelectorAll('.crew-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+        
+        // Touch events
+        carouselWrapper.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            carouselWrapper.style.transition = 'none';
+        });
+        
+        carouselWrapper.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const currentX = e.touches[0].clientX;
+            const diff = currentX - startX;
+            const translateX = -currentSlide * 100 + (diff / crewGrid.offsetWidth) * 100;
+            carouselWrapper.style.transform = `translateX(${translateX}%)`;
+        });
+        
+        carouselWrapper.addEventListener('touchend', (e) => {
+            isDragging = false;
+            carouselWrapper.style.transition = 'transform 0.4s ease';
+            const endX = e.changedTouches[0].clientX;
+            const diff = endX - startX;
+            
+            if (diff < -50 && currentSlide < crewMembers.length - 1) {
+                goToSlide(currentSlide + 1);
+            } else if (diff > 50 && currentSlide > 0) {
+                goToSlide(currentSlide - 1);
+            } else {
+                goToSlide(currentSlide);
+            }
+        });
+        
+        // Dot clicks
+        document.querySelectorAll('.crew-dot').forEach((dot, index) => {
+            dot.addEventListener('click', () => goToSlide(index));
+        });
+        
+        // Auto-play
+        setInterval(() => {
+            if (!isDragging) {
+                currentSlide = (currentSlide + 1) % crewMembers.length;
+                goToSlide(currentSlide);
+            }
+        }, 4000);
+    }
+
+    // ============================
+    // INITIALIZE ALL FEATURES
     // ============================
     function init() {
         // Wait for DOM to be fully loaded
@@ -604,16 +978,19 @@
         initContactImageAlignment();
         initMobileMenu();
         initSmoothScrolling();
-        initScrollAnimations();
-        initHeroParallax();
-        initScrollProgress();
         initScrollToTop();
         initWhatsAppButton();
+        initHeroParallax();
+        initScrollProgress();
         initLoginModal();
         initProductCardEffects();
         initLoadingAnimation();
+        initImageLazyLoading();
+        initVisionMobileCarousel();
+        initTestimonialsMobileCarousel();
+        initCrewMobileCarousel();
 
-        console.log('🎯 Calisthenics.Co - All interactions initialized successfully!');
+        console.log(' Calisthenics.Co - All interactions initialized successfully!');
     }
 
     // Start initialization

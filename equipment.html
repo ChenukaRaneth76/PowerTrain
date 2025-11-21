@@ -76,7 +76,55 @@
 
     <!-- Shop Container -->
     <div class="shop-container">
-        <!-- Filter Bar -->
+        <!-- Mobile Filter Toggle -->
+        <button class="mobile-filter-toggle" id="mobileFilterToggle">
+            <span><i class="fas fa-filter"></i>Filters</span>
+            <i class="fas fa-chevron-down toggle-icon"></i>
+        </button>
+
+        <!-- Mobile Filter Panel -->
+        <div class="filter-panel-mobile" id="filterPanelMobile">
+            <div class="filter-group">
+                <label>Category</label>
+                <select id="categoryFilterMobile">
+                    <option value="all">All Categories</option>
+                    <option value="weights">Weights</option>
+                    <option value="resistance">Resistance Bands</option>
+                    <option value="mat">Exercise Mats</option>
+                    <option value="gym equipments">Gym Equipments</option>
+                    <option value="Parallettes">Parallettes</option>
+                    <option value="pull-up bar">Pull-Up Bars</option>
+                    <option value="dip-bars">Dip-Bars</option>
+                    <option value="dip belt">Dip Belt</option>
+                    <option value="protective gear">Protective Gear</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Price Range</label>
+                <select id="priceFilterMobile">
+                    <option value="all">All Prices</option>
+                    <option value="low">Under RS.2000</option>
+                    <option value="mid">RS.2000 - RS.4000</option>
+                    <option value="high">Above RS.4000</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Material</label>
+                <select id="materialFilterMobile">
+                    <option value="all">All Materials</option>
+                    <option value="steel">Steel</option>
+                    <option value="wood">Wood</option>
+                    <option value="rubber">Rubber</option>
+                </select>
+            </div>
+            <div class="filter-tags">
+                <div class="filter-tag active" data-filter="all">All</div>
+                <div class="filter-tag" data-filter="new">New</div>
+                <div class="filter-tag" data-filter="sale">Sale</div>
+            </div>
+        </div>
+
+        <!-- Desktop Filter Bar -->
         <div class="filter-bar">
             <div class="filter-group">
                 <label>Category</label>
@@ -143,25 +191,25 @@
         </div>
     </div>
 
-    <!-- Footer -->
+   <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <div class="footer-logo">
-                        <i class="fas fa-dumbbell"></i>
+                        <div class="nav-logo">
+                        <img src="IMG/logo1.png" alt="Calisthenics.Co" class="nav-logo-img" width="120" height="120" loading="lazy">
                         <h3>Powertain.Fitness</h3>
                     </div>
-                    <p>Transform your body and mind with us.</p>
+                    <p>We're a community built on strength, movement, and discipline. Our handcrafted equipment and performance apparel are designed to help you achieve your calisthenics goals.</p>
                 </div>
                 <div class="footer-section">
                     <h4>USEFUL LINKS</h4>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="equipment.html">Equipment</a></li>
-                        <li><a href="clothing.html">Clothing</a></li>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#equipment">Equipment's</a></li>
+                        <li><a href="#products">Clothing</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -169,15 +217,15 @@
                     <div class="contact-info">
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <span>Powertain@gmail.com</span>
+                            <span>powertainfitnesslk@gmail.com</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
-                            <span>077123123456</span>
+                            <span>0713293562 | 0763517172 </span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>413/A Harwela Sr. Lanka</span>
+                            <span>Hanwella Colombo, Sri Lanka</span>
                         </div>
                     </div>
                 </div>
