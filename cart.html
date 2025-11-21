@@ -453,11 +453,18 @@
                 if (!imageSrc || imageSrc === '' || imageSrc === 'null' || imageSrc === '0' || imageSrc === 'undefined') {
                     console.warn(' No valid image, using logo fallback for:', item.product_name);
                     imageSrc = 'IMG/logo1.png';
-                }
-                // If image path doesn't start with IMG/, uploads/, or http, assume it needs IMG/ prefix
-                else if (!imageSrc.startsWith('IMG/') && !imageSrc.startsWith('uploads/') && !imageSrc.startsWith('http')) {
-                    console.log('Adding IMG/ prefix to:', imageSrc);
-                    imageSrc = 'IMG/' + imageSrc;
+                } else {
+                    // STEP 1: Remove leading slash if present (important!)
+                    if (imageSrc.startsWith('/')) {
+                        imageSrc = imageSrc.substring(1);
+                        console.log(' Removed leading slash, new path:', imageSrc);
+                    }
+                    
+                    // STEP 2: Add IMG/ prefix only if needed
+                    if (!imageSrc.startsWith('IMG/') && !imageSrc.startsWith('uploads/') && !imageSrc.startsWith('http')) {
+                        console.log(' Adding IMG/ prefix to:', imageSrc);
+                        imageSrc = 'IMG/' + imageSrc;
+                    }
                 }
                 
                 console.log(' Final image source:', imageSrc);

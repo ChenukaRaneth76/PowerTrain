@@ -604,8 +604,16 @@
                 let imageSrc = item.product_image;
                 if (!imageSrc || imageSrc === '' || imageSrc === 'null' || imageSrc === '0') {
                     imageSrc = 'IMG/clo1.webp';
-                } else if (!imageSrc.startsWith('IMG/') && !imageSrc.startsWith('uploads/') && !imageSrc.startsWith('http')) {
-                    imageSrc = 'IMG/' + imageSrc;
+                } else {
+                    // STEP 1: Remove leading slash if present
+                    if (imageSrc.startsWith('/')) {
+                        imageSrc = imageSrc.substring(1);
+                    }
+                    
+                    // STEP 2: Add IMG/ prefix only if needed
+                    if (!imageSrc.startsWith('IMG/') && !imageSrc.startsWith('uploads/') && !imageSrc.startsWith('http')) {
+                        imageSrc = 'IMG/' + imageSrc;
+                    }
                 }
                 
                 return `

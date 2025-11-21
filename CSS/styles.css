@@ -408,11 +408,6 @@ body {
 
 .vision-item {
     text-align: center;
-    background: #fff;
-    padding: 0;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
 }
 
 .vision-image {
@@ -420,9 +415,9 @@ body {
     height: 250px;
     margin: 0 auto 1rem;
     border-radius: 10px;
-    background-size: cover !important;
-    background-position: center center !important;
-    background-repeat: no-repeat !important;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     overflow: hidden;
     position: relative;
 }
@@ -1181,54 +1176,19 @@ body {
     .hero {
         flex-direction: column;
         text-align: center;
-        padding: 100px 20px 50px;
-        min-height: auto;
-    }
-
-    .hero-content {
-        max-width: 100%;
-        margin-bottom: 2rem;
-        padding: 0 10px;
+        padding: 120px 20px 50px;
     }
 
     .hero h1 {
         font-size: 2.5rem;
-        letter-spacing: -1px;
     }
 
-    .hero p {
-        font-size: 1rem;
-        max-width: 100%;
+    .hero-content {
+        margin-bottom: 2rem;
     }
 
     .hero-buttons {
         justify-content: center;
-        gap: 0.8rem;
-    }
-
-    .hero-buttons .btn {
-        padding: 12px 24px;
-        font-size: 0.9rem;
-    }
-
-    .hero-image {
-        width: 100%;
-        height: 400px;
-        margin-top: 2rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .hero-photo {
-        position: relative;
-        width: 90%;
-        max-width: 350px;
-        height: 400px;
-        left: auto;
-        top: auto;
-        transform: none;
-        margin: 0 auto;
     }
 
     .hero-social {
@@ -1237,13 +1197,8 @@ body {
         flex-direction: row;
         justify-content: center;
         margin-top: 2rem;
-        gap: 1rem;
     }
 
-    .hero-social a {
-        width: 45px;
-        height: 45px;
-    }
 
     /* Vision Section */
     .vision {
@@ -1276,9 +1231,7 @@ body {
     }
 
     .vision-image {
-        height: 250px;
-        background-size: cover !important;
-        background-position: center center !important;
+        height: 200px;
     }
 
     /* Products Section */
@@ -1456,19 +1409,11 @@ body {
 
     .hero-image {
         height: 350px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
 
     .hero-photo {
         width: 95%;
-        max-width: 320px;
         height: 350px;
-        left: auto;
-        top: auto;
-        transform: none;
-        margin: 0 auto;
     }
 
     .hero-social a {
@@ -1518,10 +1463,6 @@ body {
     /* Vision items */
     .vision-item {
         padding: 1.5rem 1rem;
-    }
-
-    .vision-image {
-        height: 220px;
     }
 
     .vision-item h4 {

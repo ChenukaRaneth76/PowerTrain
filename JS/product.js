@@ -661,17 +661,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 const fullUrl = mainImageElement.src;
                 console.log('Full image URL from page:', fullUrl);
                 
-                // Get everything after the domain
-                const urlParts = fullUrl.split('/GYM/');
+                // Get everything after the domain - handle both spaces and encoded spaces
+                const urlParts = fullUrl.split('/Powertain Fitness/');
                 if (urlParts.length > 1) {
                     productImage = urlParts[1];
                 } else {
-                    // Try another method
-                    const url = new URL(fullUrl);
-                    productImage = url.pathname.replace('/GYM/', '');
+                    // Try with encoded space
+                    const urlPartsEncoded = fullUrl.split('/Powertain%20Fitness/');
+                    if (urlPartsEncoded.length > 1) {
+                        productImage = urlPartsEncoded[1];
+                    } else {
+                        // Try another method
+                        const url = new URL(fullUrl);
+                        const pathname = decodeURIComponent(url.pathname);
+                        productImage = pathname.replace('/Powertain Fitness/', '').replace('/Powertain%20Fitness/', '');
+                    }
                 }
                 
                 console.log('Extracted relative path:', productImage);
+            }
+            
+            // Remove leading slash if present to avoid double slash issues
+            if (productImage && productImage.startsWith('/')) {
+                productImage = productImage.substring(1);
+                console.log('Removed leading slash from path:', productImage);
             }
             
             // Fallback to currentProduct data if main image is not available
