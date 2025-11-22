@@ -2292,3 +2292,19 @@ html {
     transform: scale(1);
   }
 }
+/* -------- Android + Tablet Responsive Fix -------- */
+@media (max-width: 1024px) { 
+  /* Apply your mobile styles here if needed */
+}
+
+@media (max-width: 912px) { 
+  /* Apply the same mobile styles as 768px */
+}
+
+@media (max-width: 820px) { 
+  /* Prevent Android devices from using desktop layout */
+}
+
+@media (max-width: 600px) { 
+  /* Reinforce mobile layout for most Android phones */
+}
