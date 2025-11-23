@@ -34,62 +34,130 @@
     }
 
     // ============================
-    // 1. PRODUCT TABS FUNCTIONALITY
+    // 1. PRODUCT TABS & CAROUSEL FUNCTIONALITY
     // ============================
     function initProductTabs() {
         const tabButtons = document.querySelectorAll('.tab-btn');
-        const productCards = document.querySelectorAll('.product-card');
+        const carouselTrack = document.querySelector('.products-carousel-track');
+        const prevBtn = document.querySelector('.carousel-prev');
+        const nextBtn = document.querySelector('.carousel-next');
+        
+        if (!carouselTrack) return;
         
         // Create and position the animated underline
         const tabsContainer = document.querySelector('.product-tabs');
-        if (!tabsContainer) return;
+        if (tabsContainer) {
+            const underline = document.createElement('div');
+            underline.className = 'tab-underline';
+            underline.style.cssText = `
+                position: absolute;
+                bottom: 0;
+                height: 3px;
+                background: #dc2626;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 1;
+            `;
+            tabsContainer.style.position = 'relative';
+            tabsContainer.appendChild(underline);
 
-        const underline = document.createElement('div');
-        underline.className = 'tab-underline';
-        underline.style.cssText = `
-            position: absolute;
-            bottom: 0;
-            height: 3px;
-            background: #dc2626;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1;
-        `;
-        tabsContainer.style.position = 'relative';
-        tabsContainer.appendChild(underline);
-
-        // Function to update underline position
-        function updateUnderline(button) {
-            const rect = button.getBoundingClientRect();
-            const containerRect = tabsContainer.getBoundingClientRect();
-            const left = rect.left - containerRect.left;
-            const width = rect.width;
-            
-            underline.style.width = width + 'px';
-            underline.style.left = left + 'px';
-        }
-
-        // Initialize underline position
-        const activeTab = document.querySelector('.tab-btn.active');
-        if (activeTab) {
-            updateUnderline(activeTab);
-        }
-
-        // Handle tab hover animation
-        tabButtons.forEach(button => {
-            button.addEventListener('mouseenter', () => {
-                updateUnderline(button);
-            });
-        });
-
-        // Return underline to active tab when mouse leaves
-        tabsContainer.addEventListener('mouseleave', () => {
-            const activeBtn = document.querySelector('.tab-btn.active');
-            if (activeBtn) {
-                updateUnderline(activeBtn);
+            // Function to update underline position
+            function updateUnderline(button) {
+                const rect = button.getBoundingClientRect();
+                const containerRect = tabsContainer.getBoundingClientRect();
+                const left = rect.left - containerRect.left;
+                const width = rect.width;
+                
+                underline.style.width = width + 'px';
+                underline.style.left = left + 'px';
             }
-        });
 
-        // Handle tab click and product filtering
+            // Initialize underline position
+            const activeTab = document.querySelector('.tab-btn.active');
+            if (activeTab) {
+                updateUnderline(activeTab);
+            }
+
+            // Handle tab hover animation
+            tabButtons.forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    updateUnderline(button);
+                });
+            });
+
+            // Return underline to active tab when mouse leaves
+            tabsContainer.addEventListener('mouseleave', () => {
+                const activeBtn = document.querySelector('.tab-btn.active');
+                if (activeBtn) {
+                    updateUnderline(activeBtn);
+                }
+            });
+        }
+
+        // Carousel state
+        let currentIndex = 0;
+        let currentCategory = 'equipment';
+
+        // Get products for current category
+        function getCurrentProducts() {
+            return Array.from(carouselTrack.querySelectorAll(`.product-card[data-category="${currentCategory}"]`));
+        }
+
+        // Get products per view based on screen size
+        function getProductsPerView() {
+            const isMobile = window.innerWidth <= 480;
+            const isTablet = window.innerWidth <= 768;
+            return isMobile ? 1 : (isTablet ? 1 : 2);
+        }
+
+        // Update carousel position
+        function updateCarousel() {
+            const products = getCurrentProducts();
+            if (products.length === 0) return;
+            
+            const productsPerView = getProductsPerView();
+            const container = carouselTrack.parentElement;
+            const containerWidth = container ? container.offsetWidth : window.innerWidth;
+            const cardWidth = containerWidth / productsPerView;
+            const gap = window.innerWidth <= 480 ? 16 : 32; // 1rem on mobile, 2rem on desktop
+            
+            const maxIndex = Math.max(0, products.length - productsPerView);
+            currentIndex = Math.min(currentIndex, maxIndex);
+            
+            const translateX = -(currentIndex * (cardWidth + gap));
+            carouselTrack.style.transform = `translateX(${translateX}px)`;
+            
+            // Update arrow states
+            if (prevBtn) {
+                prevBtn.disabled = currentIndex === 0;
+                prevBtn.style.opacity = currentIndex === 0 ? '0.4' : '1';
+                prevBtn.style.cursor = currentIndex === 0 ? 'not-allowed' : 'pointer';
+            }
+            if (nextBtn) {
+                nextBtn.disabled = currentIndex >= maxIndex;
+                nextBtn.style.opacity = currentIndex >= maxIndex ? '0.4' : '1';
+                nextBtn.style.cursor = currentIndex >= maxIndex ? 'not-allowed' : 'pointer';
+            }
+        }
+
+        // Initialize carousel
+        function initCarousel() {
+            const products = getCurrentProducts();
+            // Hide all products first
+            carouselTrack.querySelectorAll('.product-card').forEach(card => {
+                card.style.display = 'none';
+            });
+            // Show only current category products
+            products.forEach((card, index) => {
+                card.style.display = 'block';
+            });
+            currentIndex = 0;
+            // Wait for DOM to update before calculating positions
+            setTimeout(() => {
+                updateCarousel();
+            }, 50);
+        }
+
+        // Handle tab click - switch category and reset carousel
         tabButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const targetCategory = button.dataset.tab;
@@ -97,62 +165,66 @@
                 // Update active tab
                 tabButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
-                updateUnderline(button);
-
-                // Filter products with smooth animation
-                productCards.forEach((card, index) => {
-                    const cardCategory = card.dataset.category;
-                    
-                    if (cardCategory === targetCategory) {
-                        // Show matching products
-                        setTimeout(() => {
-                            card.style.display = 'block';
-                            setTimeout(() => {
-                                card.style.opacity = '0';
-                                card.style.transform = 'translateY(20px)';
-                                
-                                requestAnimationFrame(() => {
-                                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                                    card.style.opacity = '1';
-                                    card.style.transform = 'translateY(0)';
-                                });
-                            }, 10);
-                        }, index * 50);
-                    } else {
-                        // Hide non-matching products
-                        card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                        card.style.opacity = '0';
-                        card.style.transform = 'translateY(-20px)';
-                        
-                        setTimeout(() => {
-                            card.style.display = 'none';
-                        }, 300);
+                
+                if (tabsContainer) {
+                    const underline = tabsContainer.querySelector('.tab-underline');
+                    if (underline) {
+                        const rect = button.getBoundingClientRect();
+                        const containerRect = tabsContainer.getBoundingClientRect();
+                        underline.style.width = rect.width + 'px';
+                        underline.style.left = (rect.left - containerRect.left) + 'px';
                     }
-                });
+                }
+                
+                // Update category and reset carousel
+                currentCategory = targetCategory;
+                carouselTrack.setAttribute('data-category', targetCategory);
+                currentIndex = 0;
+                initCarousel();
             });
         });
 
-        // Update underline position on window resize (throttled)
+        // Carousel navigation
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateCarousel();
+                }
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                const products = getCurrentProducts();
+                const productsPerView = getProductsPerView();
+                const maxIndex = Math.max(0, products.length - productsPerView);
+                if (currentIndex < maxIndex) {
+                    currentIndex++;
+                    updateCarousel();
+                }
+            });
+        }
+
+        // Handle window resize
         window.addEventListener('resize', throttle(() => {
-            const activeBtn = document.querySelector('.tab-btn.active');
-            if (activeBtn) {
-                updateUnderline(activeBtn);
+            updateCarousel();
+            if (tabsContainer) {
+                const activeBtn = document.querySelector('.tab-btn.active');
+                if (activeBtn) {
+                    const underline = tabsContainer.querySelector('.tab-underline');
+                    if (underline) {
+                        const rect = activeBtn.getBoundingClientRect();
+                        const containerRect = tabsContainer.getBoundingClientRect();
+                        underline.style.width = rect.width + 'px';
+                        underline.style.left = (rect.left - containerRect.left) + 'px';
+                    }
+                }
             }
         }, 150));
-        
-        // Initialize products display - show only equipment by default
-        const defaultCategory = 'equipment';
-        productCards.forEach(card => {
-            const cardCategory = card.dataset.category;
-            if (cardCategory === defaultCategory) {
-                card.style.display = 'block';
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            } else {
-                card.style.display = 'none';
-                card.style.opacity = '0';
-            }
-        });
+
+        // Initialize on load
+        initCarousel();
     }
 
     // ============================

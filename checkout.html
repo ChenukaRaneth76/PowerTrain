@@ -499,15 +499,15 @@
                             </div>
                             <div class="bank-row">
                                 <span class="bank-label">Account Name:</span>
-                                <span class="bank-value">Powertain Fitness</span>
+                                <span class="bank-value">Y.B.Dunusinghe</span>
                             </div>
                             <div class="bank-row">
                                 <span class="bank-label">Account Number:</span>
-                                <span class="bank-value">1234567890</span>
+                                <span class="bank-value">8021846232</span>
                             </div>
                             <div class="bank-row">
                                 <span class="bank-label">Branch:</span>
-                                <span class="bank-value">Colombo Main</span>
+                                <span class="bank-value">Hanwella Main</span>
                             </div>
                             <div class="bank-row">
                                 <span class="bank-label">Total Amount:</span>
@@ -616,6 +616,22 @@
                     }
                 }
                 
+                // Check if product is clothing (to show size and color) or equipment (only quantity)
+                const isClothing = item.product_type === 'clothing';
+                
+                // Build meta information based on product type
+                let metaInfo = `Qty: ${item.quantity}`;
+                if (isClothing) {
+                    // For clothing: show size and color if available
+                    if (item.size) {
+                        metaInfo += ` | Size: ${item.size}`;
+                    }
+                    if (item.color) {
+                        metaInfo += ` | Color: ${item.color}`;
+                    }
+                }
+                // For equipment: only quantity is shown (already set above)
+                
                 return `
                     <div class="summary-item">
                         <img src="${imageSrc}" 
@@ -625,8 +641,7 @@
                         <div class="summary-item-details">
                             <div class="summary-item-name">${item.product_name}</div>
                             <div class="summary-item-meta">
-                                Qty: ${item.quantity} 
-                                ${item.size ? `| Size: ${item.size}` : ''}
+                                ${metaInfo}
                             </div>
                             <div class="summary-item-price">Rs.${item.subtotal.toFixed(2)}</div>
                         </div>

@@ -981,7 +981,7 @@ async function loadUsers() {
                     <td><span class="badge-count">${
                       user.orders || 0
                     }</span></td>
-                    <td><span class="badge-money">$${parseFloat(
+                    <td><span class="badge-money">Rs.${parseFloat(
                       user.total_spent || 0
                     ).toFixed(2)}</span></td>
                     <td><span class="status-badge status-active">Active</span></td>

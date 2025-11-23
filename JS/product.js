@@ -414,11 +414,53 @@ function displayRelatedProducts(products, type) {
     const relatedSection = document.getElementById('relatedProducts');
     const relatedGrid = document.getElementById('relatedProductsGrid');
     
-    relatedGrid.innerHTML = products.map(product => `
-        <div class="product-card-shop" onclick="viewProduct(${product.id}, '${type}')">
-            <div class="product-img-shop" style="background-image: url('${product.image || 'IMG/placeholder.png'}')">
-                ${product.status && product.status !== 'normal' ? 
-                    `<span class="product-badge ${product.status}">${product.status.toUpperCase()}</span>` : ''}
+    console.log('Displaying related products:', products);
+    
+    relatedGrid.innerHTML = products.map(product => {
+        // Fix image path - check all possible image fields
+        // The backend 'list' action returns raw DB rows, so images might be in image1, image2, etc.
+        let imageSrc = product.image || product.image1 || product.image2 || product.image3 || '';
+        
+        console.log(`Product ${product.id} (${product.name}):`, {
+            image: product.image,
+            image1: product.image1,
+            image2: product.image2,
+            image3: product.image3,
+            rawProduct: product
+        });
+        
+        // If image is empty, null, or invalid, use placeholder
+        if (!imageSrc || imageSrc === '' || imageSrc === 'null' || imageSrc === '0' || imageSrc === 'undefined') {
+            imageSrc = 'IMG/placeholder.png';
+            console.log(`Using placeholder for product ${product.id}`);
+        } else {
+            // STEP 1: Remove leading slash if present
+            if (imageSrc.startsWith('/')) {
+                imageSrc = imageSrc.substring(1);
+            }
+            
+            // STEP 2: Add IMG/ prefix only if needed
+            if (!imageSrc.startsWith('IMG/') && !imageSrc.startsWith('uploads/') && !imageSrc.startsWith('http')) {
+                imageSrc = 'IMG/' + imageSrc;
+            }
+        }
+        
+        console.log(`Final image path for product ${product.id}:`, imageSrc);
+        
+        // Use the same card style as equipment page
+        const badgeHtml = product.status && product.status !== 'normal' 
+            ? `<span class="product-badge ${product.status}">${product.status.toUpperCase()}</span>`
+            : '';
+        
+        return `
+        <div class="product-card-shop" 
+             onclick="viewProduct(${product.id}, '${type}')"
+             data-category="${product.category}" 
+             data-price="${product.price}" 
+             data-status="${product.status || 'normal'}"
+             data-product-id="${product.id}">
+            <div class="product-img-shop" style="background-image: url('${imageSrc}')">
+                ${badgeHtml}
             </div>
             <div class="product-details-shop">
                 <div class="product-category">${getCategoryDisplayName(product.category)}</div>
@@ -431,7 +473,8 @@ function displayRelatedProducts(products, type) {
                 <button class="add-to-cart" onclick="event.stopPropagation(); quickAddToCart(${product.id}, '${type}')">ADD TO CART</button>
             </div>
         </div>
-    `).join('');
+        `;
+    }).join('');
     
     relatedSection.style.display = 'block';
 }

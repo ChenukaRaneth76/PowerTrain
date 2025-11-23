@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="pageTitle">Product - Powertain.Fitness</title>
     <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="CSS/equipment.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -388,6 +389,14 @@
     gap: 2rem;
 }
 
+/* Use same grid style as equipment page for related products */
+#relatedProductsGrid.products-grid-shop {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    animation: fadeIn 1s ease 0.3s both;
+}
+
 .product-card {
     text-align: center;
     cursor: pointer;
@@ -411,6 +420,45 @@
 .product-price {
     font-weight: 700;
     color: #000;
+}
+
+/* Related Products Styles - Using equipment.css styles */
+/* Override to show add-to-cart button and rating on product page */
+#relatedProductsGrid .product-card-shop .add-to-cart {
+    display: block !important;
+    width: 100%;
+    padding: 10px;
+    background: #000;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 0.5rem;
+}
+
+#relatedProductsGrid .product-card-shop .add-to-cart:hover {
+    background: #333;
+}
+
+#relatedProductsGrid .product-card-shop .product-rating {
+    display: flex !important;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Ensure card height matches equipment page exactly */
+#relatedProductsGrid .product-card-shop {
+    height: auto;
+}
+
+#relatedProductsGrid .product-img-shop {
+    height: 280px;
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
 }
 
 /* ============================
@@ -662,9 +710,7 @@
                                 <i class="fas fa-plus"></i>
                             </div>
                             <div class="detail-content">
-                                Free delivery on orders over Rs.5000<br>
-                                Standard delivery: 3-5 business days<br>
-                                Express delivery: 1-2 business days
+                              Standard delivery: 3-5 business days<br>
                             </div>
                         </div>
                     </div>
@@ -681,7 +727,7 @@
             <!-- Related Products -->
             <div id="relatedProducts" class="related-products" style="display: none;">
                 <h2 class="section-heading">YOU MIGHT ALSO LIKE</h2>
-                <div id="relatedProductsGrid" class="products-grid">
+                <div id="relatedProductsGrid" class="products-grid-shop">
                     <!-- Related products will be loaded dynamically -->
                 </div>
             </div>
