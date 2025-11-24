@@ -141,64 +141,67 @@
     <!-- Products Section -->
     <section id="products" class="products">
         <div class="container">
-            <div class="products-header">
-                <h2>TOP BRAND PRODUCTS</h2>
-                <div class="product-tabs">
-                    <button class="tab-btn" data-tab="clothing">CLOTHING</button>
-                    <button class="tab-btn active" data-tab="equipment">EQUIPMENT</button>
-                    <button class="tab-btn" data-tab="training">TRAINING</button>
+            <h2>TOP BRAND PRODUCTS</h2>
+            <div class="product-tabs">
+                <button class="tab-btn" data-tab="clothing">CLOTHING</button>
+                <button class="tab-btn active" data-tab="equipment">EQUIPMENT</button>
+                <button class="tab-btn" data-tab="training">TRAINING</button>
+            </div>
+            <div class="products-grid">
+
+                 <!-- Equipment Products (Hidden by default) -->
+                <div class="product-card" data-category="equipment" style="display: none;">
+                    <a href="equipment.html">
+                    <div class="product-image" style="background-image: url('IMG/iteam1.jpg')" loading="lazy"></div>
+                    </a>
+                    <h4>Classic pull-up Bar</h4>
+                    <p>RS.15900.00</p>
+                </div>
+                <div class="product-card" data-category="equipment" style="display: none;">
+                    <a href="equipment.html">
+                    <div class="product-image" style="background-image: url('IMG/iteam6.webp')" loading="lazy"></div>
+                    </a>
+                    <h4>Low Parallettes</h4>
+                    <p>RS.6900.00</p>
+                </div>
+                <div class="product-card" data-category="equipment" style="display: none;">
+                    <a href="equipment.html">
+                    <div class="product-image" style="background-image: url('IMG/iteam2.jpg')" loading="lazy"></div>
+                    </a>
+                    <h4>Classic pull-up Bar</h4>
+                    <p>RS.15900.00</p>
+                </div>
+                <div class="product-card" data-category="equipment" style="display: none;">
+                    <a href="equipment.html">
+                    <div class="product-image" style="background-image: url('IMG/iteam3.jpg')" loading="lazy"></div>
+                    </a>
+                    <h4>Premium High Parallettes</h4>
+                    <p>RS.19900.00</p>
+                </div>
+                <div class="product-card" data-category="equipment" style="display: none;">
+                    <a href="equipment.html">
+                    <div class="product-image" style="background-image: url('IMG/iteam4.jpg')" loading="lazy"></div>
+                    </a>
+                    <h4>Mini Parallettes</h4>
+                    <p>RS.5900.00</p>
+                </div>
+                <div class="product-card" data-category="equipment" style="display: none;">
+                    <a href="equipment.html">
+                    <div class="product-image" style="background-image: url('IMG/iteam5.jpg')" loading="lazy"></div>
+                    </a>
+                    <h4>Premium High Parallettes</h4>
+                    <p>RS.19900.00</p>
                 </div>
             </div>
-            
-            <div class="products-carousel-wrapper">
-                <button class="carousel-arrow carousel-prev" aria-label="Previous products">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                
-                <div class="products-carousel-container">
-                    <div class="products-carousel-track" data-category="equipment">
-                        <!-- Equipment Products -->
-                        <div class="product-card" data-category="equipment">
-                            <div class="product-image" style="background-image: url('IMG/iteam1.jpg')" loading="lazy"></div>
-                            <h4>Classic pull-up Bar</h4>
-                            <p>Rs.15,900.00</p>
-                        </div>
-                        <div class="product-card" data-category="equipment">
-                            <div class="product-image" style="background-image: url('IMG/iteam6.webp')" loading="lazy"></div>
-                            <h4>Low Parallettes</h4>
-                            <p>Rs.6,900.00</p>
-                        </div>
-                        <div class="product-card" data-category="equipment">
-                            <div class="product-image" style="background-image: url('IMG/iteam2.jpg')" loading="lazy"></div>
-                            <h4>Classic pull-up Bar</h4>
-                            <p>Rs.15,900.00</p>
-                        </div>
-                        <div class="product-card" data-category="equipment">
-                            <div class="product-image" style="background-image: url('IMG/iteam3.jpg')" loading="lazy"></div>
-                            <h4>Premium High Parallettes</h4>
-                            <p>Rs.19,900.00</p>
-                        </div>
-                        <div class="product-card" data-category="equipment">
-                            <div class="product-image" style="background-image: url('IMG/iteam4.jpg')" loading="lazy"></div>
-                            <h4>Mini Parallettes</h4>
-                            <p>Rs.5,900.00</p>
-                        </div>
-                        <div class="product-card" data-category="equipment">
-                            <div class="product-image" style="background-image: url('IMG/iteam5.jpg')" loading="lazy"></div>
-                            <h4>Premium High Parallettes</h4>
-                            <p>Rs.19,900.00</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <button class="carousel-arrow carousel-next" aria-label="Next products">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
             </div>
-            
+             <div class="mobile-carousel-container">
+                <div class="carousel-arrow left" id="prodPrev">&lt;</div>
+                <div class="carousel-arrow right" id="prodNext">&gt;</div>
+                <div class="mobile-carousel-track" id="prodCarousel">
+        <!-- JS Will insert the cards here -->
+             </div>
             <div class="view-all">
                 <a href="equipment.html" class="btn btn-primary">VIEW ALL PRODUCTS →</a>
-            </div>
         </div>
     </section>
 
