@@ -429,6 +429,7 @@ body {
   position: relative;
 }
 
+
 .vision-image.clothing {
   background-image: url("../IMG/vision-cl.webp");
 }
@@ -442,11 +443,17 @@ body {
 }
 
 .vision-item h4 {
-  font-size: 1.2rem;
+  cursor: pointer;            /* show pointer on hover */
+  color: #000;                /* normal text color */
   font-weight: 700;
-  color: #000;
   text-transform: uppercase;
   letter-spacing: 1px;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.vision-item h4 a {
+    text-decoration: none;  /* remove underline */
+    color: inherit;         /* keep the h4 color */
 }
 
 .vision-bg {
@@ -497,9 +504,13 @@ body {
 
 .product-tabs {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap; /* desktop: no wrap */
   justify-content: center;
-  gap: 2rem;
-  margin-bottom: 3rem;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .tab-btn {
@@ -1377,21 +1388,16 @@ body {
     margin-bottom: 2rem;
   }
 
-  .product-tabs {
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+ .product-tabs {
+    display: flex !important;       /* force horizontal row */
+    flex-wrap: nowrap !important;   /* prevent stacking */
+    justify-content: center;        /* center tabs on mobile */
+    overflow-x: auto;               /* allow horizontal scroll if needed */
   }
 
   .tab-btn {
-    padding: 8px 16px;
-    font-size: 0.85rem;
-    flex: 0 0 auto;
-    white-space: nowrap;
+    flex: 0 1 auto;                 /* keep button width automatic */
+    white-space: nowrap;             /* text stays in one line */
   }
 
   .products-grid {
